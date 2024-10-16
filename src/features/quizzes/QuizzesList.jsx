@@ -1,15 +1,16 @@
 import Button from "../../ui/Button"
 import QuizItem from "./QuizItem"
 import { useQuizzes } from "../../contexts/QuizzesContext"
+import Spinner from "../../ui/Spinner"
 
 function QuizzesList() {
     const { quizzes, isLoading } = useQuizzes()
 
     if (isLoading)
         return (
-            <p className="text-center text-xl font-bold text-gray-200">
-                Loading...
-            </p>
+            <div className="mt-24 flex justify-center">
+                <Spinner />
+            </div>
         )
 
     return (
