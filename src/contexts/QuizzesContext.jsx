@@ -2,6 +2,18 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 const QuizzesContext = createContext()
 
+const initialState = {
+    // can be also ready, active, finished
+    status: "loading",
+    quizzes: [],
+    activeQuiz: {
+        id: null,
+        currentQuestion: 0,
+        answer: null,
+        correctAnswer: null,
+    },
+}
+
 function QuizzesProvider({ children }) {
     const [isLoading, setIsLoading] = useState(true)
     const [quizzes, setQuizzes] = useState({})
