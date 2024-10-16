@@ -1,9 +1,16 @@
-import { useState } from "react"
 import Button from "../../ui/Button"
 import QuizItem from "./QuizItem"
+import { useQuizzes } from "../../contexts/QuizzesContext"
 
 function QuizzesList() {
-    const [quizzes, setQuizzes] = useState([])
+    const { quizzes, isLoading } = useQuizzes()
+
+    if (isLoading)
+        return (
+            <p className="text-center text-xl font-bold text-gray-200">
+                Loading...
+            </p>
+        )
 
     return (
         <div className="flex flex-col items-center">

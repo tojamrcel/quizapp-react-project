@@ -3,22 +3,20 @@ import { createContext, useContext, useEffect, useState } from "react"
 const QuizzesContext = createContext()
 
 function QuizzesProvider({ children }) {
-    const [quizzes, setQuizzes] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [quizzes, setQuizzes] = useState({})
 
     useEffect(function () {
-        async function fetchData() {
-            const res = await fetch("../data/quizzes.json")
-            const data = await res.json()
-
-            return data
-        }
-
-        const quizzesData = fetchData()
-        setQuizzes(quizzesData)
+        fetch("http://localhost:8000/quizzes")
+            .then((res) => res.json())
+            .then((data) => {
+                setQuizzes(data)
+                setIsLoading(false)
+            })
     }, [])
 
     return (
-        <QuizzesContext.Provider value={{ quizzes }}>
+        <QuizzesContext.Provider value={{ quizzes, isLoading }}>
             {children}
         </QuizzesContext.Provider>
     )
