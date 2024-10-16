@@ -1,13 +1,23 @@
+import { useState } from "react"
 import Button from "../../ui/Button"
 import QuizItem from "./QuizItem"
 
 function QuizzesList() {
+    const [quizzes, setQuizzes] = useState([])
+
     return (
         <div className="flex flex-col items-center">
             <ul className="no-scrollbar flex max-h-[75dvh] w-full flex-col gap-8 overflow-auto scroll-smooth px-4 py-8 shadow-sm md:max-h-[85dvh]">
-                {data.map((quiz) => (
-                    <QuizItem quiz={quiz} key={quiz.id} />
-                ))}
+                {quizzes.length ? (
+                    quizzes.map((quiz) => (
+                        <QuizItem quiz={quiz} key={quiz.id} />
+                    ))
+                ) : (
+                    <p className="text-center text-xl font-bold text-gray-200">
+                        There are no quizzes at the moment, but you can create
+                        your own quiz!
+                    </p>
+                )}
             </ul>
             <Button type="full-width">CREATE YOUR OWN QUIZ</Button>
         </div>
