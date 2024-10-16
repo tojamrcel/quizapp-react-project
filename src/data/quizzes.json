@@ -4,6 +4,7 @@
             "id": 1,
             "title": "Science Quiz",
             "author": "Marcel G",
+            "description": "Quiz about science things.",
             "questions": [
                 {
                     "question": "What is the chemical symbol for gold?",
@@ -81,6 +82,7 @@
             "id": 2,
             "title": "History Quiz.",
             "author": "hello123",
+            "description": "Quiz about history things.",
             "questions": [
                 {
                     "question": "Who was the first President of the United States?",
@@ -183,6 +185,7 @@
             "id": 3,
             "title": "Literature Quiz.",
             "author": "test321",
+            "description": "Quiz about literature.",
             "questions": [
                 {
                     "question": "Who wrote the play \"Romeo and Juliet\"?",
