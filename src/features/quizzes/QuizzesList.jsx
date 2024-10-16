@@ -52,7 +52,7 @@ const data = [
 
 function QuizzesList() {
     return (
-        <ul className="no-scrollbar flex max-h-[90dvh] flex-col gap-8 overflow-auto px-4 py-8 shadow-sm">
+        <ul className="no-scrollbar flex max-h-[90dvh] flex-col gap-8 overflow-auto scroll-smooth px-4 py-8 shadow-sm">
             {data.map((quiz) => (
                 <li
                     className="hover:scale flex min-h-[10rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8 transition-all duration-500 hover:translate-y-[-4px]"
