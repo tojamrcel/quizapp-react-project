@@ -1,7 +1,7 @@
 function QuizItem({ quiz }) {
     return (
         <li
-            className="hover:scale relative flex max-h-[12rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8 transition-all duration-500 hover:translate-y-[-4px]"
+            className="hover:scale relative flex max-h-[12rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8 transition-all duration-300 hover:translate-x-[2px]"
             key={quiz.id}
         >
             <h2 className="flex items-center text-xl font-bold tracking-tighter text-zinc-800 md:text-2xl">
