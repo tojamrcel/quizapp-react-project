@@ -1,3 +1,4 @@
+import Button from "../../ui/Button"
 import QuizItem from "./QuizItem"
 
 const data = [
@@ -60,9 +61,7 @@ function QuizzesList() {
                     <QuizItem quiz={quiz} key={quiz.id} />
                 ))}
             </ul>
-            <button className="my-4 h-12 w-[80%] cursor-pointer rounded-md bg-violet-900 font-bold text-gray-200 transition-all duration-300 hover:bg-violet-950 md:w-full">
-                CREATE YOUR OWN QUIZ
-            </button>
+            <Button type="full-width">CREATE YOUR OWN QUIZ</Button>
         </div>
     )
 }
