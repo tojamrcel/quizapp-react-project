@@ -54,11 +54,16 @@ const data = [
 
 function QuizzesList() {
     return (
-        <ul className="no-scrollbar flex max-h-[90dvh] flex-col gap-8 overflow-auto scroll-smooth px-4 py-8 shadow-sm">
-            {data.map((quiz) => (
-                <QuizItem quiz={quiz} key={quiz.id} />
-            ))}
-        </ul>
+        <div className="flex flex-col items-center">
+            <ul className="no-scrollbar flex max-h-[75dvh] w-full flex-col gap-8 overflow-auto scroll-smooth px-4 py-8 shadow-sm md:max-h-[85dvh]">
+                {data.map((quiz) => (
+                    <QuizItem quiz={quiz} key={quiz.id} />
+                ))}
+            </ul>
+            <button className="my-4 h-12 w-[80%] cursor-pointer rounded-md bg-violet-900 font-bold text-gray-200 transition-all duration-300 hover:bg-violet-950 md:w-full">
+                CREATE YOUR OWN QUIZ
+            </button>
+        </div>
     )
 }
 
