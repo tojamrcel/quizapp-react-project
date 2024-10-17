@@ -12,6 +12,7 @@ const initialState = {
     // can be also ready, active, finished
     status: "loading",
     quizzes: [],
+    error: "",
     activeQuiz: {
         id: null,
         currentQuestion: 0,
@@ -24,29 +25,30 @@ function reducer(state, action) {
     switch (action.type) {
         case "dataReceived":
             return { ...state, status: "ready", quizzes: action.payload }
+        case "dataFailed":
+            return { ...state, status: "error", error: action.payload }
     }
 }
 
 function QuizzesProvider({ children }) {
-    const [{ status, activeQuiz, quizzes: quizzes2 }, dispatch] = useReducer(
+    const [{ status, activeQuiz, quizzes, error }, dispatch] = useReducer(
         reducer,
         initialState,
     )
-
-    const [isLoading, setIsLoading] = useState(true)
-    const [quizzes, setQuizzes] = useState({})
 
     useEffect(function () {
         fetch("http://localhost:8000/quizzes")
             .then((res) => res.json())
             .then((data) => {
-                setQuizzes(data)
-                setIsLoading(false)
+                dispatch({ type: "dataReceived", payload: data })
             })
+            .catch((err) =>
+                dispatch({ type: "dataFailed", payload: err.message }),
+            )
     }, [])
 
     return (
-        <QuizzesContext.Provider value={{ quizzes, isLoading }}>
+        <QuizzesContext.Provider value={{ status, quizzes, error, activeQuiz }}>
             {children}
         </QuizzesContext.Provider>
     )
