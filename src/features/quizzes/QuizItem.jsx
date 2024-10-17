@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 
 function QuizItem({ quiz }) {
     const { startQuiz } = useQuizzes()
+    const navigate = useNavigate()
 
     return (
         <li
@@ -15,7 +17,10 @@ function QuizItem({ quiz }) {
                 {quiz.description}
             </p>
             <button
-                onClick={() => startQuiz(quiz)}
+                onClick={() => {
+                    startQuiz(quiz)
+                    navigate(`/quiz/${quiz.id}`)
+                }}
                 className="absolute bottom-0 right-2 my-2 rounded-md bg-violet-900 px-3 py-1 font-bold uppercase tracking-tight text-gray-200 transition-all duration-300 hover:cursor-pointer hover:bg-violet-950 md:px-6 md:py-3"
             >
                 Play
