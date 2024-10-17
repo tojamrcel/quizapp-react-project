@@ -40,7 +40,7 @@ function reducer(state, action) {
                     id: action.payload.id,
                     currentQuestion: 0,
                     answer: null,
-                    questions: action.payload.questions.at(0),
+                    questions: action.payload.questions,
                     correctAnswer: action.payload.correctAnswer,
                 },
             }
@@ -69,13 +69,16 @@ function QuizzesProvider({ children }) {
             type: "startQuiz",
             payload: {
                 id: quiz.id,
+                questions: quiz.questions,
+                correctAnswer: quiz.questions.at(0).correctAnswer,
             },
         })
-        console.log(activeQuiz)
     }
 
     return (
-        <QuizzesContext.Provider value={{ status, quizzes, error, activeQuiz }}>
+        <QuizzesContext.Provider
+            value={{ status, quizzes, error, activeQuiz, startQuiz }}
+        >
             {children}
         </QuizzesContext.Provider>
     )
