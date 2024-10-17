@@ -24,9 +24,26 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case "dataReceived":
-            return { ...state, status: "ready", quizzes: action.payload }
+            return {
+                ...state,
+                status: "ready",
+                error: "",
+                quizzes: action.payload,
+            }
         case "dataFailed":
             return { ...state, status: "error", error: action.payload }
+        case "startQuiz":
+            return {
+                ...state,
+                status: "active",
+                activeQuiz: {
+                    id: action.payload.id,
+                    currentQuestion: 0,
+                    answer: null,
+                    questions: action.payload.questions.at(0),
+                    correctAnswer: action.payload.correctAnswer,
+                },
+            }
     }
 }
 
@@ -46,6 +63,16 @@ function QuizzesProvider({ children }) {
                 dispatch({ type: "dataFailed", payload: err.message }),
             )
     }, [])
+
+    function startQuiz(quiz) {
+        dispatch({
+            type: "startQuiz",
+            payload: {
+                id: quiz.id,
+            },
+        })
+        console.log(activeQuiz)
+    }
 
     return (
         <QuizzesContext.Provider value={{ status, quizzes, error, activeQuiz }}>
