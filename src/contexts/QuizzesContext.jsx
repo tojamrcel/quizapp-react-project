@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useReducer,
+    useState,
+} from "react"
 
 const QuizzesContext = createContext()
 
@@ -14,7 +20,19 @@ const initialState = {
     },
 }
 
+function reducer(state, action) {
+    switch (action.type) {
+        case "dataReceived":
+            return { ...state, status: "ready", quizzes: action.payload }
+    }
+}
+
 function QuizzesProvider({ children }) {
+    const [{ status, activeQuiz, quizzes: quizzes2 }, dispatch] = useReducer(
+        reducer,
+        initialState,
+    )
+
     const [isLoading, setIsLoading] = useState(true)
     const [quizzes, setQuizzes] = useState({})
 
