@@ -1,12 +1,12 @@
+import { useQuizzes } from "../../contexts/QuizzesContext"
 import Button from "../../ui/Button"
 import QuizItem from "./QuizItem"
-import { useQuizzes } from "../../contexts/QuizzesContext"
 import Spinner from "../../ui/Spinner"
 
 function QuizzesList() {
-    const { quizzes, isLoading } = useQuizzes()
+    const { quizzes, status } = useQuizzes()
 
-    if (isLoading)
+    if (status === "loading")
         return (
             <div className="mt-24 flex justify-center">
                 <Spinner />
