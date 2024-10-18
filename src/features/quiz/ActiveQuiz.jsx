@@ -14,7 +14,10 @@ function ActiveQuiz() {
         dispatch({ type: "newAnswer", payload: userAnswerIndex })
 
         setTimeout(function () {
-            dispatch({ type: "nextQuestion" })
+            dispatch({
+                type: "nextQuestion",
+                payload: questions?.at(currentQuestion + 1).correctAnswer,
+            })
         }, 2000)
     }
 
