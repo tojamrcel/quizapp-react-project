@@ -38,6 +38,17 @@ function reducer(state, action) {
                     correctAnswer: action.payload.correctAnswer,
                 },
             }
+        case "newAnswer":
+            return {
+                ...state,
+                activeQuiz: {
+                    answer: action.payload,
+                    corrects:
+                        state.activeQuiz.correctAnswer === action.payload
+                            ? state.corrects + 1
+                            : state.corrects,
+                },
+            }
     }
 }
 
