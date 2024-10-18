@@ -4,10 +4,19 @@ import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
     const { activeQuiz, dispatch } = useQuizzes()
-    const { currentQuestion, questions } = activeQuiz
+    const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
 
     if (!activeQuiz.id) return <Spinner />
+
+    function handleClick(userAnswerIndex) {
+        if (answer !== null) return
+        dispatch({ type: "newAnswer", payload: userAnswerIndex })
+
+        setTimeout(function () {
+            dispatch({ type: "nextQuestion" })
+        }, 2000)
+    }
 
     return (
         <div className="flex min-h-[60dvh] w-full items-center justify-center">
@@ -20,7 +29,13 @@ function ActiveQuiz() {
                 </h2>
                 <ul className="flex flex-col gap-3 text-lg">
                     {question.answers.map((ans, i) => (
-                        <AnswerItem index={i} answer={ans} key={ans} />
+                        <AnswerItem
+                            index={i}
+                            answer={ans}
+                            key={ans}
+                            onClick={handleClick}
+                            active={i === activeQuiz.answer}
+                        />
                     ))}
                 </ul>
             </div>
