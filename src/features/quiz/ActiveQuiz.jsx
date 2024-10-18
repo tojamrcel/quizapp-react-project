@@ -33,7 +33,7 @@ function ActiveQuiz() {
 
     return (
         <>
-            <div className="flex min-h-[60dvh] w-full flex-col items-center justify-center">
+            <div className="my-4 flex min-h-[60dvh] w-full flex-col items-center justify-center md:my-0">
                 <div className="flex w-[90%] flex-col justify-center gap-5">
                     <h2 className="text-3xl font-bold text-gray-200 md:text-4xl">
                         <span className="text-violet-900">
