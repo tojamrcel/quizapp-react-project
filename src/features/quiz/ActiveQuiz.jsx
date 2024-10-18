@@ -1,7 +1,7 @@
+import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
 import Spinner from "../../ui/Spinner"
-import { useState } from "react"
 
 function ActiveQuiz() {
     const [seconds, setSeconds] = useState(3)
