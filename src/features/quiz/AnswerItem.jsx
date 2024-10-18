@@ -11,7 +11,7 @@ function AnswerItem({ index, answer, onClick, active }) {
     return (
         <li
             onClick={() => onClick(index)}
-            className={`${active && classStr} cursor-pointer rounded-sm border bg-gray-300 px-4 py-3 shadow-md transition-transform duration-200 hover:scale-[1.01]`}
+            className={`${active ? classStr : "border-transparent"} transition-color cursor-pointer rounded-sm border-4 bg-gray-300 px-4 py-3 shadow-md duration-200 hover:scale-[1.01]`}
         >
             <p className="font-bold text-zinc-900">{answer}</p>
         </li>
