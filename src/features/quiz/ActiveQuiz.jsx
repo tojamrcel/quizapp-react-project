@@ -3,7 +3,7 @@ import AnswerItem from "./AnswerItem"
 import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
-    const { activeQuiz } = useQuizzes()
+    const { activeQuiz, dispatch } = useQuizzes()
     const { currentQuestion, questions } = activeQuiz
     const question = questions?.at(currentQuestion)
 
@@ -19,8 +19,8 @@ function ActiveQuiz() {
                     {question.question}
                 </h2>
                 <ul className="flex flex-col gap-3 text-lg">
-                    {question.answers.map((ans) => (
-                        <AnswerItem answer={ans} key={ans} />
+                    {question.answers.map((ans, i) => (
+                        <AnswerItem index={i} answer={ans} key={ans} />
                     ))}
                 </ul>
             </div>

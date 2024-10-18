@@ -9,6 +9,7 @@ const initialState = {
     error: "",
     activeQuiz: {
         id: null,
+        corrects: 0,
         currentQuestion: 0,
         answer: null,
         correctAnswer: null,
@@ -31,6 +32,7 @@ function reducer(state, action) {
                 ...state,
                 status: "active",
                 activeQuiz: {
+                    ...state.activeQuiz,
                     id: action.payload.id,
                     currentQuestion: 0,
                     answer: null,
@@ -42,11 +44,12 @@ function reducer(state, action) {
             return {
                 ...state,
                 activeQuiz: {
+                    ...state.activeQuiz,
                     answer: action.payload,
                     corrects:
                         state.activeQuiz.correctAnswer === action.payload
-                            ? state.corrects + 1
-                            : state.corrects,
+                            ? state.activeQuiz.corrects + 1
+                            : state.activeQuiz.corrects,
                 },
             }
     }
@@ -82,7 +85,7 @@ function QuizzesProvider({ children }) {
 
     return (
         <QuizzesContext.Provider
-            value={{ status, quizzes, error, activeQuiz, startQuiz }}
+            value={{ status, quizzes, error, activeQuiz, startQuiz, dispatch }}
         >
             {children}
         </QuizzesContext.Provider>
