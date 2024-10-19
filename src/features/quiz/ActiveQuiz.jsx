@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
+import { Navigate } from "react-router-dom"
 // import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
-    const { activeQuiz, dispatch, status, quizzes } = useQuizzes()
+    const { activeQuiz, dispatch, status } = useQuizzes()
     const [seconds, setSeconds] = useState(3)
     const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
@@ -37,34 +38,37 @@ function ActiveQuiz() {
 
     return (
         <>
-            <div className="my-4 flex min-h-[60dvh] w-full flex-col items-center justify-center md:my-0">
-                <div className="flex w-[90%] flex-col justify-center gap-5">
-                    <h2 className="text-3xl font-bold text-gray-200 md:text-4xl">
-                        <span className="text-violet-900">
-                            {currentQuestion + 1}.
-                        </span>{" "}
-                        {question.question}
-                    </h2>
-                    <ul className="flex flex-col gap-3 text-lg">
-                        {question.answers.map((ans, i) => (
-                            <AnswerItem
-                                index={i}
-                                answer={ans}
-                                key={ans}
-                                onClick={handleClick}
-                                active={i === activeQuiz.answer}
-                            />
-                        ))}
-                    </ul>
+            {status === "active" && (
+                <div className="my-4 flex min-h-[60dvh] w-full flex-col items-center justify-center md:my-0">
+                    <div className="flex w-[90%] flex-col justify-center gap-5">
+                        <h2 className="text-3xl font-bold text-gray-200 md:text-4xl">
+                            <span className="text-violet-900">
+                                {currentQuestion + 1}.
+                            </span>{" "}
+                            {question.question}
+                        </h2>
+                        <ul className="flex flex-col gap-3 text-lg">
+                            {question.answers.map((ans, i) => (
+                                <AnswerItem
+                                    index={i}
+                                    answer={ans}
+                                    key={ans}
+                                    onClick={handleClick}
+                                    active={i === activeQuiz.answer}
+                                />
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="h-2">
+                        {answer !== null ? (
+                            <p className="p-2 font-semibold text-zinc-500">
+                                Next question in {seconds}...
+                            </p>
+                        ) : null}
+                    </div>
                 </div>
-                <div className="h-2">
-                    {answer !== null ? (
-                        <p className="p-2 font-semibold text-zinc-500">
-                            Next question in {seconds}...
-                        </p>
-                    ) : null}
-                </div>
-            </div>
+            )}
+            {status === "finished" && <Navigate to="/result" />}
         </>
     )
 }
