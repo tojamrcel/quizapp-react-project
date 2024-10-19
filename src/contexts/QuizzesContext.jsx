@@ -13,6 +13,7 @@ const initialState = {
         currentQuestion: 0,
         answer: null,
         correctAnswer: null,
+        questions: [],
     },
 }
 
@@ -62,6 +63,12 @@ function reducer(state, action) {
                     correctAnswer: action.payload,
                 },
             }
+        case "finishQuiz":
+            return {
+                ...state,
+                status: "finished",
+                activeQuiz: { ...state.activeQuiz },
+            }
     }
 }
 
@@ -70,9 +77,6 @@ function QuizzesProvider({ children }) {
         reducer,
         initialState,
     )
-
-    const question = activeQuiz?.questions?.at(activeQuiz.currentQuestion)
-    console.log(question)
 
     useEffect(function () {
         fetch("http://localhost:8000/quizzes")

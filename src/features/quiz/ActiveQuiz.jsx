@@ -1,16 +1,14 @@
 import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
-import Spinner from "../../ui/Spinner"
+// import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
     const [seconds, setSeconds] = useState(3)
-
-    const { activeQuiz, dispatch } = useQuizzes()
+    const { activeQuiz, dispatch, status } = useQuizzes()
     const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
-
-    if (!activeQuiz.id) return <Spinner />
+    // if (!activeQuiz.id) return <Spinner />
 
     function handleClick(userAnswerIndex) {
         if (answer !== null) return
@@ -24,10 +22,16 @@ function ActiveQuiz() {
 
         setTimeout(function () {
             clearInterval(counter)
-            dispatch({
-                type: "nextQuestion",
-                payload: questions?.at(currentQuestion + 1).correctAnswer,
-            })
+
+            if (questions.length === currentQuestion + 1)
+                dispatch({
+                    type: "finishQuiz",
+                })
+            else
+                dispatch({
+                    type: "nextQuestion",
+                    payload: questions?.at(currentQuestion + 1).correctAnswer,
+                })
         }, 3000)
     }
 
