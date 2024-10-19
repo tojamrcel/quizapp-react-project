@@ -4,8 +4,8 @@ import AnswerItem from "./AnswerItem"
 // import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
+    const { activeQuiz, dispatch, status, quizzes } = useQuizzes()
     const [seconds, setSeconds] = useState(3)
-    const { activeQuiz, dispatch, status } = useQuizzes()
     const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
     // if (!activeQuiz.id) return <Spinner />
