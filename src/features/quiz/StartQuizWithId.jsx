@@ -10,7 +10,8 @@ function StartQuizWithId({ quiz }) {
             <div className="flex max-w-[80%] flex-col items-center justify-center gap-4 rounded-xl bg-zinc-300 px-[1rem] py-[3rem] shadow-lg md:px-[6rem] md:py-[6rem]">
                 <h2 className="text-center text-3xl font-bold leading-9 md:text-4xl">
                     Would you like to start the{" "}
-                    <span className="md:block">"{quiz.title}"</span> quiz?
+                    <span className="md:block">&quot;{quiz.title}&quot;</span>{" "}
+                    quiz?
                 </h2>
                 <Button type="wide" onClick={() => startQuiz?.(quiz)}>
                     START QUIZ
