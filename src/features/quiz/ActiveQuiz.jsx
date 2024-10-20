@@ -3,7 +3,7 @@ import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
 import { Navigate, useParams } from "react-router-dom"
 import StartQuizWithId from "./StartQuizWithId"
-// import Spinner from "../../ui/Spinner"
+import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
     const { quizId } = useParams()
@@ -14,7 +14,6 @@ function ActiveQuiz() {
     const quizById = !activeQuiz.id
         ? quizzes.find((quiz) => +quiz.id === +quizId)
         : null
-    // if (!activeQuiz.id) return <Spinner />
     console.log(quizById)
 
     function handleClick(userAnswerIndex) {
@@ -74,8 +73,9 @@ function ActiveQuiz() {
                     </div>
                 </div>
             )}
-            {status === "ready" && <StartQuizWithId />}
+            {status === "ready" && <StartQuizWithId quiz={quizById} />}
             {status === "finished" && <Navigate to="/result" />}
+            {status === "loading" && <Spinner />}
         </>
     )
 }

@@ -93,7 +93,7 @@ function QuizzesProvider({ children }) {
         dispatch({
             type: "startQuiz",
             payload: {
-                id: quiz.id,
+                id: +quiz.id,
                 questions: quiz.questions,
                 correctAnswer: quiz.questions.at(0).correctAnswer,
             },
