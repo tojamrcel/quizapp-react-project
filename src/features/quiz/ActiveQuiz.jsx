@@ -1,15 +1,20 @@
 import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
-import { Navigate } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 // import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
-    const { activeQuiz, dispatch, status } = useQuizzes()
+    const { quizId } = useParams()
+    const { activeQuiz, dispatch, status, quizzes } = useQuizzes()
     const [seconds, setSeconds] = useState(3)
     const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
+    const quizById = !activeQuiz.id
+        ? quizzes.find((quiz) => +quiz.id === +quizId)
+        : null
     // if (!activeQuiz.id) return <Spinner />
+    console.log(quizById)
 
     function handleClick(userAnswerIndex) {
         if (answer !== null) return
@@ -53,8 +58,8 @@ function ActiveQuiz() {
                                     index={i}
                                     answer={ans}
                                     key={ans}
-                                    onClick={handleClick}
                                     active={i === activeQuiz.answer}
+                                    onClick={handleClick}
                                 />
                             ))}
                         </ul>
