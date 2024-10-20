@@ -3,6 +3,7 @@ import AppLayout from "./ui/AppLayout"
 import Quizzes from "./pages/quizzes"
 import Quiz from "./pages/Quiz"
 import Result from "./pages/Result"
+import ProtectedRoute from "./ui/ProtectedRoute"
 
 function App() {
     return (
@@ -15,7 +16,14 @@ function App() {
                     ></Route>
                     <Route path="quizzes" element={<Quizzes />} />
                     <Route path="quiz/:quizId" element={<Quiz />} />
-                    <Route path="result" element={<Result />} />
+                    <Route
+                        path="result"
+                        element={
+                            <ProtectedRoute>
+                                <Result />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>
