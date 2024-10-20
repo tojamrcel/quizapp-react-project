@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
 import { Navigate, useParams } from "react-router-dom"
+import StartQuizWithId from "./StartQuizWithId"
 // import Spinner from "../../ui/Spinner"
 
 function ActiveQuiz() {
@@ -73,6 +74,7 @@ function ActiveQuiz() {
                     </div>
                 </div>
             )}
+            {status === "ready" && <StartQuizWithId />}
             {status === "finished" && <Navigate to="/result" />}
         </>
     )
