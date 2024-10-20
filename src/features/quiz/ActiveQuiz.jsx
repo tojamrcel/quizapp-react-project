@@ -14,7 +14,6 @@ function ActiveQuiz() {
     const quizById = !activeQuiz.id
         ? quizzes.find((quiz) => +quiz.id === +quizId)
         : null
-    console.log(quizById)
 
     function handleClick(userAnswerIndex) {
         if (answer !== null) return
