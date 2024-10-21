@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { Navigate, useParams } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
-import Error from "../../ui/Error"
 import AnswerItem from "./AnswerItem"
 import StartQuizWithId from "./StartQuizWithId"
 import Spinner from "../../ui/Spinner"
+import Button from "../../ui/Button"
+import Error from "../../ui/Error"
 
 function ActiveQuiz() {
     const { quizId } = useParams()
@@ -41,11 +42,10 @@ function ActiveQuiz() {
                 })
         }, 3000)
     }
-
     return (
         <>
             {status === "active" && (
-                <div className="my-4 flex min-h-[60dvh] w-full flex-col items-center justify-center md:my-0">
+                <div className="my-4 flex min-h-[65dvh] w-full flex-col items-center justify-center gap-5 md:my-0">
                     <div className="flex w-[90%] flex-col justify-center gap-5">
                         <h2 className="text-3xl font-bold text-gray-200 md:text-4xl">
                             <span className="text-violet-900">
@@ -65,14 +65,18 @@ function ActiveQuiz() {
                             ))}
                         </ul>
                     </div>
-                    <div className="h-2">
-                        {answer !== null ? (
-                            <p className="p-2 font-semibold text-zinc-500">
-                                {questions.length !== currentQuestion + 1
-                                    ? `Next question in ${seconds}...`
-                                    : `You'll see your result in ${seconds}...`}
-                            </p>
-                        ) : null}
+                    <div className="flex min-w-[90%] justify-between">
+                        <Button>BACK</Button>
+                        <div className="h-2">
+                            {answer !== null ? (
+                                <p className="p-2 font-semibold text-zinc-500">
+                                    {questions.length !== currentQuestion + 1
+                                        ? `Next question in ${seconds}...`
+                                        : `You'll see your result in ${seconds}...`}
+                                </p>
+                            ) : null}
+                        </div>
+                        <Button>RESTART</Button>
                     </div>
                 </div>
             )}
