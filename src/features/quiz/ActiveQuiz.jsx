@@ -11,16 +11,18 @@ function ActiveQuiz() {
     const navigate = useNavigate()
     const { quizId } = useParams()
     const { activeQuiz, dispatch, status, quizzes, stopQuiz } = useQuizzes()
-    const [seconds, setSeconds] = useState(3)
-    const { currentQuestion, questions, answer } = activeQuiz
 
+    const [seconds, setSeconds] = useState(3)
+    const [isRestarting, setIsRestarting] = useState(false)
+
+    const { currentQuestion, questions, answer } = activeQuiz
     const question = questions?.at(currentQuestion)
     const quizById = !activeQuiz.id
         ? quizzes.find((quiz) => +quiz.id === +quizId)
         : null
 
     function handleClick(userAnswerIndex) {
-        if (answer !== null) return
+        if (answer !== null || isRestarting) return
         dispatch({ type: "newAnswer", payload: userAnswerIndex })
         setSeconds(3)
 
@@ -43,6 +45,26 @@ function ActiveQuiz() {
                 })
         }, 3000)
     }
+
+    function handleRestart() {
+        setIsRestarting(true)
+        setSeconds(3)
+
+        const counter = setInterval(
+            () => setSeconds((seconds) => seconds - 1),
+            1000,
+        )
+
+        setTimeout(function () {
+            clearInterval(counter)
+
+            dispatch({
+                type: "restartQuiz",
+            })
+            setIsRestarting(false)
+        }, 3000)
+    }
+
     return (
         <>
             {status === "active" && (
@@ -61,6 +83,7 @@ function ActiveQuiz() {
                                     answer={ans}
                                     key={ans}
                                     active={i === activeQuiz.answer}
+                                    disabled={isRestarting}
                                     onClick={handleClick}
                                 />
                             ))}
@@ -68,7 +91,7 @@ function ActiveQuiz() {
                     </div>
                     <div className="flex min-w-[90%] justify-between">
                         <Button
-                            disabled={answer !== null}
+                            disabled={answer !== null || isRestarting}
                             onClick={() => {
                                 stopQuiz()
                                 navigate("/")
@@ -77,15 +100,27 @@ function ActiveQuiz() {
                             BACK
                         </Button>
                         <div className="h-2">
-                            {answer !== null ? (
+                            {answer !== null || isRestarting ? (
                                 <p className="p-2 font-semibold text-zinc-500">
-                                    {questions.length !== currentQuestion + 1
-                                        ? `Next question in ${seconds}...`
-                                        : `You'll see your result in ${seconds}...`}
+                                    {isRestarting
+                                        ? `Quiz will restart in ${seconds}...`
+                                        : questions.length !==
+                                            currentQuestion + 1
+                                          ? `Next question in ${seconds}...`
+                                          : `You'll see your result in ${seconds}...`}
                                 </p>
                             ) : null}
                         </div>
-                        <Button disabled={answer !== null}>RESTART</Button>
+                        <Button
+                            disabled={
+                                answer !== null ||
+                                isRestarting ||
+                                currentQuestion === 0
+                            }
+                            onClick={handleRestart}
+                        >
+                            RESTART
+                        </Button>
                     </div>
                 </div>
             )}

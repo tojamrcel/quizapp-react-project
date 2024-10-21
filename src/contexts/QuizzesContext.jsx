@@ -83,6 +83,18 @@ function reducer(state, action) {
                     questions: [],
                 },
             }
+        case "restartQuiz":
+            return {
+                ...state,
+                activeQuiz: {
+                    ...state.activeQuiz,
+                    corrects: 0,
+                    currentQuestion: 0,
+                    answer: null,
+                    correctAnswer:
+                        state.activeQuiz.questions.at(0).correctAnswer,
+                },
+            }
     }
 }
 
