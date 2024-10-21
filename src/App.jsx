@@ -4,6 +4,7 @@ import Quizzes from "./pages/quizzes"
 import Quiz from "./pages/Quiz"
 import Result from "./pages/Result"
 import ProtectedRoute from "./ui/ProtectedRoute"
+import PageNotFound from "./pages/PageNotFound"
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route path="*" element={<PageNotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>
