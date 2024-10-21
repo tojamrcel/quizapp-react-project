@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Navigate, useParams } from "react-router-dom"
-
 import { useQuizzes } from "../../contexts/QuizzesContext"
+import Error from "../../ui/Error"
 import AnswerItem from "./AnswerItem"
 import StartQuizWithId from "./StartQuizWithId"
 import Spinner from "../../ui/Spinner"
@@ -76,7 +76,12 @@ function ActiveQuiz() {
                     </div>
                 </div>
             )}
-            {status === "ready" && <StartQuizWithId quiz={quizById} />}
+            {status === "ready" && quizById && (
+                <StartQuizWithId quiz={quizById} />
+            )}
+            {status === "ready" && !quizById && (
+                <Error message="Quiz not found." />
+            )}
             {status === "finished" && <Navigate to="/result" />}
             {status === "loading" && <Spinner />}
         </>
