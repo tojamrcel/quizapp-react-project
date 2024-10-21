@@ -69,6 +69,20 @@ function reducer(state, action) {
                 status: "finished",
                 activeQuiz: { ...state.activeQuiz },
             }
+        case "stopQuiz":
+            return {
+                ...state,
+                status: "ready",
+                activeQuiz: {
+                    ...state.activeQuiz,
+                    id: null,
+                    corrects: 0,
+                    currentQuestion: 0,
+                    answer: null,
+                    correctAnswer: null,
+                    questions: [],
+                },
+            }
     }
 }
 
@@ -100,9 +114,23 @@ function QuizzesProvider({ children }) {
         })
     }
 
+    function stopQuiz() {
+        dispatch({
+            type: "stopQuiz",
+        })
+    }
+
     return (
         <QuizzesContext.Provider
-            value={{ status, quizzes, error, activeQuiz, startQuiz, dispatch }}
+            value={{
+                status,
+                quizzes,
+                error,
+                activeQuiz,
+                startQuiz,
+                stopQuiz,
+                dispatch,
+            }}
         >
             {children}
         </QuizzesContext.Provider>

@@ -10,7 +10,7 @@ import Error from "../../ui/Error"
 function ActiveQuiz() {
     const navigate = useNavigate()
     const { quizId } = useParams()
-    const { activeQuiz, dispatch, status, quizzes } = useQuizzes()
+    const { activeQuiz, dispatch, status, quizzes, stopQuiz } = useQuizzes()
     const [seconds, setSeconds] = useState(3)
     const { currentQuestion, questions, answer } = activeQuiz
 
@@ -69,6 +69,7 @@ function ActiveQuiz() {
                     <div className="flex min-w-[90%] justify-between">
                         <Button
                             onClick={() => {
+                                stopQuiz()
                                 navigate("/")
                             }}
                         >
