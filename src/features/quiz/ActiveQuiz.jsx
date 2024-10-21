@@ -68,6 +68,7 @@ function ActiveQuiz() {
                     </div>
                     <div className="flex min-w-[90%] justify-between">
                         <Button
+                            disabled={answer !== null}
                             onClick={() => {
                                 stopQuiz()
                                 navigate("/")
@@ -84,7 +85,7 @@ function ActiveQuiz() {
                                 </p>
                             ) : null}
                         </div>
-                        <Button>RESTART</Button>
+                        <Button disabled={answer !== null}>RESTART</Button>
                     </div>
                 </div>
             )}
