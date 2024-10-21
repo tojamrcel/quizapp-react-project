@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Navigate, useParams } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import AnswerItem from "./AnswerItem"
 import StartQuizWithId from "./StartQuizWithId"
@@ -8,6 +8,7 @@ import Button from "../../ui/Button"
 import Error from "../../ui/Error"
 
 function ActiveQuiz() {
+    const navigate = useNavigate()
     const { quizId } = useParams()
     const { activeQuiz, dispatch, status, quizzes } = useQuizzes()
     const [seconds, setSeconds] = useState(3)
@@ -66,7 +67,13 @@ function ActiveQuiz() {
                         </ul>
                     </div>
                     <div className="flex min-w-[90%] justify-between">
-                        <Button>BACK</Button>
+                        <Button
+                            onClick={() => {
+                                navigate("/")
+                            }}
+                        >
+                            BACK
+                        </Button>
                         <div className="h-2">
                             {answer !== null ? (
                                 <p className="p-2 font-semibold text-zinc-500">

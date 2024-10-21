@@ -21,7 +21,10 @@ function Button({ onClick, type, children }) {
 
     if (type === "default" || !type)
         return (
-            <button className="rounded-md bg-violet-900 px-3 py-1 font-bold uppercase tracking-tight text-gray-200 transition-all duration-300 hover:cursor-pointer hover:bg-violet-950 md:px-6 md:py-3">
+            <button
+                onClick={() => onClick?.()}
+                className="rounded-md bg-violet-900 px-3 py-1 font-bold uppercase tracking-tight text-gray-200 transition-all duration-300 hover:cursor-pointer hover:bg-violet-950 md:px-6 md:py-3"
+            >
                 {children}
             </button>
         )
