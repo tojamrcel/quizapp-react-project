@@ -5,6 +5,7 @@ const QuizzesContext = createContext()
 const initialState = {
     // can be also ready, active, finished
     status: "loading",
+    // in final version quizzes are going to be taken from quizzes array, to store quizzes created by user i'm going to use local storage.
     quizzes: [],
     error: "",
     activeQuiz: {
