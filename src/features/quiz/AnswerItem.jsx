@@ -11,7 +11,7 @@ function AnswerItem({ index, answer, onClick, active, disabled }) {
     return (
         <li
             onClick={() => (!disabled ? onClick(index) : null)}
-            className={`${active ? classStr : "border-transparent"} ${disabled ? "cursor-default opacity-85" : "hover:scale-[1.01]"} ${answered !== null || disabled ? "cursor-default" : "cursor-pointer"} transition-color rounded-sm border-4 bg-gray-300 px-4 py-3 shadow-md duration-200`}
+            className={`${active ? classStr : "border-transparent"} ${disabled ? "cursor-default opacity-90" : "hover:scale-[1.01]"} ${answered !== null || disabled ? "cursor-default" : "cursor-pointer"} transition-color rounded-sm border-4 bg-gray-300 px-4 py-3 shadow-md duration-200`}
         >
             <p className="font-bold text-zinc-900">{answer}</p>
         </li>
