@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import { HiDotsVertical } from "react-icons/hi"
+import { useOutsideClick } from "../hooks/useOutsideClick"
 
 const MenuContext = createContext()
 
@@ -38,12 +39,14 @@ function Toggle({ id }) {
 }
 
 function List({ id, children }) {
-    const { openId } = useContext(MenuContext)
+    const { openId, close } = useContext(MenuContext)
+    const ref = useOutsideClick(close)
 
     if (openId !== id) return null
 
     return (
         <ul
+            ref={ref}
             className={`absolute right-[-8px] top-[60px] z-10 overflow-clip rounded-md bg-zinc-300 text-left shadow-md`}
         >
             {children}
