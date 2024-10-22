@@ -8,6 +8,9 @@ function QuizItem({ quiz }) {
     const { startQuiz } = useQuizzes()
     const navigate = useNavigate()
 
+    const isDeleteEditDisabled =
+        +quiz.id === 1 || +quiz.id === 2 || +quiz.id === 3
+
     return (
         <li
             className={`${openId === quiz.id ? "z-10 translate-x-[2px]" : "transition-transform duration-300 hover:translate-x-[2px]"} relative flex max-h-[12rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8`}
@@ -33,8 +36,18 @@ function QuizItem({ quiz }) {
                     <Menus.Toggle id={quiz.id} />
                 </div>
                 <Menus.List id={quiz.id}>
-                    <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-                    <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                    <Menus.Button
+                        disabled={isDeleteEditDisabled}
+                        icon={<HiTrash />}
+                    >
+                        Delete
+                    </Menus.Button>
+                    <Menus.Button
+                        disabled={isDeleteEditDisabled}
+                        icon={<HiPencil />}
+                    >
+                        Edit
+                    </Menus.Button>
                 </Menus.List>
             </Menus.Menu>
         </li>

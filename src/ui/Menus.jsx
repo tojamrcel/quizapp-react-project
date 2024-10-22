@@ -23,6 +23,7 @@ function Toggle({ id }) {
     const { open, close, openId } = useContext(MenuContext)
 
     function handleClick(e) {
+        e.stopPropagation()
         openId === "" || openId !== id ? open(id) : close()
     }
 
@@ -50,7 +51,7 @@ function List({ id, children }) {
     )
 }
 
-function Button({ children, icon, onClick }) {
+function Button({ children, icon, onClick, disabled }) {
     function handleClick() {
         onClick?.()
         close?.()
@@ -59,10 +60,16 @@ function Button({ children, icon, onClick }) {
     return (
         <li>
             <button
+                disabled={disabled}
                 onClick={handleClick}
-                className={`flex w-full items-center gap-4 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200`}
+                className={`flex w-full items-center gap-4 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200 disabled:text-zinc-400`}
             >
-                {icon} <span className="text-zinc-800">{children}</span>
+                {icon}{" "}
+                <span
+                    className={`${disabled ? "text-zinc-500" : "text-zinc-800"}`}
+                >
+                    {children}
+                </span>
             </button>
         </li>
     )
