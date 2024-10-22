@@ -22,7 +22,7 @@ function Menu({ children }) {
 function Toggle({ id }) {
     const { open, close, openId } = useContext(MenuContext)
 
-    function handleClick() {
+    function handleClick(e) {
         openId === "" || openId !== id ? open(id) : close()
     }
 
@@ -43,7 +43,7 @@ function List({ id, children }) {
 
     return (
         <ul
-            className={`absolute right-8 top-12 z-10 overflow-clip rounded-md bg-zinc-300 text-left shadow-md`}
+            className={`absolute right-[-8px] top-[60px] z-10 overflow-clip rounded-md bg-zinc-300 text-left shadow-md`}
         >
             {children}
         </ul>
@@ -60,9 +60,9 @@ function Button({ children, icon, onClick }) {
         <li>
             <button
                 onClick={handleClick}
-                className="flex w-full items-center gap-2 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200"
+                className={`flex w-full items-center gap-4 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200`}
             >
-                {icon} <span>{children}</span>
+                {icon} <span className="text-zinc-800">{children}</span>
             </button>
         </li>
     )

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
-import { HiTrash } from "react-icons/hi2"
+import { HiPencil, HiTrash } from "react-icons/hi2"
 import Menus, { useMenus } from "../../ui/Menus"
 
 function QuizItem({ quiz }) {
@@ -33,9 +33,8 @@ function QuizItem({ quiz }) {
                     <Menus.Toggle id={quiz.id} />
                 </div>
                 <Menus.List id={quiz.id}>
-                    <Menus.Button icon={<HiTrash />}>test</Menus.Button>
-                    <Menus.Button icon={<HiTrash />}>test</Menus.Button>
-                    <Menus.Button icon={<HiTrash />}>test</Menus.Button>
+                    <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                    <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
                 </Menus.List>
             </Menus.Menu>
         </li>
