@@ -1,28 +1,43 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
 import { HiDotsVertical } from "react-icons/hi"
 
 const MenuContext = createContext()
 
 function Menus({ children }) {
-    const [isOpen, setIsOpen] = useState(true)
+    const [openId, setOpenId] = useState("")
+    const open = setOpenId
+    const close = () => setOpenId("")
 
-    return <MenuContext.Provider>{children}</MenuContext.Provider>
-}
-
-function Menu({ children }) {
-    return <div>{children}</div>
-}
-
-function Toggle() {
     return (
-        <button className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-400">
+        <MenuContext.Provider value={{ openId, open, close }}>
+            {children}
+        </MenuContext.Provider>
+    )
+}
+
+function Toggle({ id }) {
+    const { open, close, openId } = useContext(MenuContext)
+
+    function handleClick() {
+        openId === "" || openId !== id ? open(id) : close()
+    }
+
+    return (
+        <button
+            onClick={handleClick}
+            className="flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-400"
+        >
             <HiDotsVertical />
         </button>
     )
 }
 
-function List() {
-    return <ul></ul>
+function List({ id, children }) {
+    const { openId } = useContext(MenuContext)
+
+    if (openId !== id) return null
+
+    return <ul className={`absolute right-10 top-10`}>{children}</ul>
 }
 
 function Button({ children, icon, onClick }) {
@@ -40,7 +55,6 @@ function Button({ children, icon, onClick }) {
     )
 }
 
-Menus.Menu = Menu
 Menus.Toggle = Toggle
 Menus.List = List
 Menus.Button = Button
