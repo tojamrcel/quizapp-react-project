@@ -15,6 +15,10 @@ function Menus({ children }) {
     )
 }
 
+function Menu({ children }) {
+    return children
+}
+
 function Toggle({ id }) {
     const { open, close, openId } = useContext(MenuContext)
 
@@ -37,7 +41,13 @@ function List({ id, children }) {
 
     if (openId !== id) return null
 
-    return <ul className={`absolute right-10 top-10`}>{children}</ul>
+    return (
+        <ul
+            className={`absolute right-8 top-12 z-10 overflow-clip rounded-md bg-zinc-300 text-left shadow-md`}
+        >
+            {children}
+        </ul>
+    )
 }
 
 function Button({ children, icon, onClick }) {
@@ -48,13 +58,23 @@ function Button({ children, icon, onClick }) {
 
     return (
         <li>
-            <button onClick={handleClick}>
+            <button
+                onClick={handleClick}
+                className="flex w-full items-center gap-2 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200"
+            >
                 {icon} <span>{children}</span>
             </button>
         </li>
     )
 }
 
+export function useMenus() {
+    const context = useContext(MenuContext)
+
+    return context
+}
+
+Menus.Menu = Menu
 Menus.Toggle = Toggle
 Menus.List = List
 Menus.Button = Button
