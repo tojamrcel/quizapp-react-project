@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
-import { HiDotsVertical } from "react-icons/hi"
 
 function QuizItem({ quiz }) {
     const { startQuiz } = useQuizzes()
@@ -26,9 +25,7 @@ function QuizItem({ quiz }) {
             >
                 Play
             </button>
-            <button className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-400">
-                <HiDotsVertical />
-            </button>
+            <div className="absolute right-3 top-4"></div>
         </li>
     )
 }
