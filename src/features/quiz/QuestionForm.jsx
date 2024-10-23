@@ -18,7 +18,7 @@ function QuestionForm({ questionNum, register, errors }) {
                     <label htmlFor="question" className="-ml-2 text-lg">
                         Question {questionNum + 1}
                     </label>
-                    <button className="flex h-2 w-2 items-center justify-center rounded-full bg-red-800 p-[12px] text-lg text-gray-200 transition-colors duration-300 hover:bg-red-900">
+                    <button className="flex h-2 w-2 items-center justify-center rounded-full p-[12px] text-lg text-zinc-600 transition-colors duration-300 hover:bg-gray-200">
                         -
                     </button>
                 </div>
