@@ -14,9 +14,14 @@ function QuestionForm({ questionNum, register, errors }) {
             className={`${questionNum !== 0 ? "border-t-[1px]" : ""} border-gray-200 px-2 py-2`}
         >
             <div className="ml-2 flex flex-col gap-1">
-                <label htmlFor="question" className="-ml-2 text-lg">
-                    Question {questionNum + 1}
-                </label>
+                <div className="flex items-center gap-3">
+                    <label htmlFor="question" className="-ml-2 text-lg">
+                        Question {questionNum + 1}
+                    </label>
+                    <button className="flex h-2 w-2 items-center justify-center rounded-full bg-red-800 p-[12px] text-lg text-gray-200 transition-colors duration-300 hover:bg-red-900">
+                        -
+                    </button>
+                </div>
                 <Input
                     variation="sm"
                     register={register(`${questionNum}-question`, {
@@ -69,21 +74,23 @@ function QuestionForm({ questionNum, register, errors }) {
                         })}
                     />
                 </div>
-                <label htmlFor="correctAnswer" className="text-base">
-                    Correct answer
-                </label>
-                <select
-                    className="h-8"
-                    name="correctAnswer"
-                    {...register(`${questionNum}-correctAnswer`, {
-                        required: "This field is required.",
-                    })}
-                >
-                    <option value="0">Option 1</option>
-                    <option value="1">Option 2</option>
-                    <option value="2">Option 3</option>
-                    <option value="3">Option 4</option>
-                </select>
+                <div className="flex w-full items-center gap-2">
+                    <label htmlFor="correctAnswer" className="text-base">
+                        Correct answer
+                    </label>
+                    <select
+                        className="h-8 w-[15%]"
+                        name="correctAnswer"
+                        {...register(`${questionNum}-correctAnswer`, {
+                            required: "This field is required.",
+                        })}
+                    >
+                        <option value="0">Option 1</option>
+                        <option value="1">Option 2</option>
+                        <option value="2">Option 3</option>
+                        <option value="3">Option 4</option>
+                    </select>
+                </div>
             </div>
         </li>
     )

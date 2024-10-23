@@ -52,6 +52,9 @@ function CreateQuizForm() {
         setQuestions((questions) => questions + 1)
     }
 
+    function removeQuestion() {
+        setQuestions((questions) => questions - 1)
+    }
     return (
         <div>
             <h1 className="my-4 text-4xl font-bold">Create Quiz</h1>
@@ -108,6 +111,7 @@ function CreateQuizForm() {
                                     questionNum={i}
                                     register={register}
                                     errors={errors}
+                                    removeQuestion={removeQuestion}
                                 />
                             ),
                         )}
