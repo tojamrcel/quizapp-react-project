@@ -32,7 +32,7 @@ function Window({ children, name }) {
             <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray-300 px-[3.2rem] py-[4rem] shadow-md">
                 <button
                     onClick={close}
-                    className="absolute right-2 top-2 text-2xl"
+                    className="absolute right-4 top-4 text-2xl"
                 >
                     <HiXMark />
                 </button>
