@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import Input from "../../ui/Input"
 
-function QuestionForm({ questionNum, register }) {
+function QuestionForm({ questionNum, register, errors }) {
     const ref = useRef()
 
     useEffect(function () {
@@ -23,6 +23,13 @@ function QuestionForm({ questionNum, register }) {
                         required: "This field is required.",
                     })}
                 />
+                <div className="mb-2 h-2">
+                    {errors[`${questionNum}-question`]?.message ? (
+                        <span className="text-sm text-red-800">
+                            {errors[`${questionNum}-question`].message}
+                        </span>
+                    ) : null}
+                </div>
                 <label htmlFor="answers" className="text-base">
                     Answers
                 </label>

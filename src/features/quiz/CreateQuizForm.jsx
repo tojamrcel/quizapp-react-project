@@ -46,7 +46,6 @@ function CreateQuizForm() {
 
             quiz.questions = [...quiz.questions, question]
         })
-        console.log(quiz)
     }
 
     function addQuestion() {
@@ -68,8 +67,19 @@ function CreateQuizForm() {
                     <Input
                         register={register("title", {
                             required: "Title is required.",
+                            maxLength: {
+                                value: 16,
+                                message: "Title is too long.",
+                            },
                         })}
                     />
+                    <div className="h-3">
+                        {errors?.title?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors?.title?.message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex flex-col gap-1">
                     <label className="text-xl" htmlFor="author">
@@ -97,6 +107,7 @@ function CreateQuizForm() {
                                     key={i}
                                     questionNum={i}
                                     register={register}
+                                    errors={errors}
                                 />
                             ),
                         )}
