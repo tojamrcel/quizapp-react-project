@@ -1,8 +1,16 @@
+import { useEffect, useRef } from "react"
 import Input from "../../ui/Input"
 
 function QuestionForm({ questionNum, register }) {
+    const ref = useRef()
+
+    useEffect(function () {
+        ref.current.scrollIntoView({ behavior: "smooth" })
+    }, [])
+
     return (
         <li
+            ref={ref}
             className={`${questionNum !== 0 ? "border-t-[1px]" : ""} border-gray-200 px-2 py-2`}
         >
             <div className="ml-2 flex flex-col gap-1">
