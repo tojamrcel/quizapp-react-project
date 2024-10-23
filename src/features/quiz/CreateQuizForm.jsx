@@ -100,7 +100,7 @@ function CreateQuizForm() {
                             +
                         </button>
                     </div>
-                    <ul className="flex max-h-[18dvh] flex-col gap-6 overflow-auto sm:max-h-[25dvh]">
+                    <ul className="xs:max-h-[50dvh] flex max-h-[30dvh] flex-col gap-6 overflow-auto md:max-h-[25dvh]">
                         {Array.from({ length: questions }, (_, i) => i).map(
                             (_, i) => (
                                 <QuestionForm

@@ -5,7 +5,11 @@ export default {
         fontFamily: {
             sans: "Roboto, sans-serif",
         },
-        extend: {},
+        extend: {
+            screens: {
+                xs: "390px",
+            },
+        },
     },
     plugins: [],
 }
