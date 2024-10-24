@@ -1,6 +1,13 @@
-import { cloneElement, createContext, useContext, useState } from "react"
+import {
+    cloneElement,
+    createContext,
+    useContext,
+    useRef,
+    useState,
+} from "react"
 import { createPortal } from "react-dom"
 import { HiXMark } from "react-icons/hi2"
+import { useOutsideClick } from "../hooks/useOutsideClick"
 
 const ModalContext = createContext()
 
@@ -24,12 +31,16 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
     const { openName, close } = useContext(ModalContext)
+    const ref = useOutsideClick(close, true)
 
     if (openName !== name) return null
 
     return createPortal(
         <div className="fixed bottom-0 top-0 h-[100dvh] w-full backdrop-blur-md">
-            <div className="fixed left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-gray-300 px-[1.6rem] py-[2rem] shadow-md md:h-auto md:w-auto md:rounded-xl md:px-[3.2rem] md:py-[4rem]">
+            <div
+                ref={ref}
+                className="fixed left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-gray-300 px-[1.6rem] py-[2rem] shadow-md md:h-auto md:w-auto md:rounded-xl md:px-[3.2rem] md:py-[4rem]"
+            >
                 <button
                     onClick={close}
                     className="absolute right-4 top-4 text-2xl"
