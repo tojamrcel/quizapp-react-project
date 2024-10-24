@@ -79,7 +79,7 @@ function QuestionForm({ questionNum, register, errors }) {
                         Correct answer
                     </label>
                     <select
-                        className="h-8 w-[25%] bg-gray-100"
+                        className="h-8 w-[25%] border-violet-800 bg-gray-100 outline-none focus:border-2"
                         name="correctAnswer"
                         {...register(`${questionNum}-correctAnswer`, {
                             required: "This field is required.",
