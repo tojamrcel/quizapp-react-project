@@ -5,13 +5,10 @@ import QuestionForm from "./QuestionForm"
 import { useState } from "react"
 
 function CreateQuizForm() {
-    const {
-        handleSubmit,
-        register,
-        getValues,
-        setValue,
-        formState: { errors },
-    } = useForm()
+    const { handleSubmit, register, getValues, setValue, formState, control } =
+        useForm()
+
+    const { errors } = formState
 
     const [questions, setQuestions] = useState(1)
 
@@ -109,6 +106,7 @@ function CreateQuizForm() {
                         {Array.from({ length: questions }, (_, i) => i).map(
                             (_, i) => (
                                 <QuestionForm
+                                    control={control}
                                     key={i}
                                     numOfQuestions={questions}
                                     questionNum={i}

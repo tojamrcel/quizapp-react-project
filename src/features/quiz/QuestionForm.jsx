@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import Input from "../../ui/Input"
+import { useWatch } from "react-hook-form"
 
 function QuestionForm({
     questionNum,
@@ -8,8 +9,18 @@ function QuestionForm({
     handleDelete,
     numOfQuestions,
     setValue,
+    control,
 }) {
     const ref = useRef()
+    const values = useWatch({
+        control,
+        name: [
+            `${questionNum}-answer-0`,
+            `${questionNum}-answer-1`,
+            `${questionNum}-answer-2`,
+            `${questionNum}-answer-3`,
+        ],
+    })
 
     useEffect(function () {
         ref.current.scrollIntoView({ behavior: "smooth" })
@@ -65,6 +76,7 @@ function QuestionForm({
                         variation="sm"
                         register={register(`${questionNum}-answer-0`, {
                             required: "This field is required.",
+                            validate: () => {},
                         })}
                     />
                 </div>
@@ -106,10 +118,10 @@ function QuestionForm({
                             required: "This field is required.",
                         })}
                     >
-                        <option value="0">Option 1</option>
-                        <option value="1">Option 2</option>
-                        <option value="2">Option 3</option>
-                        <option value="3">Option 4</option>
+                        <option value="0">{values[0] || "Option 1"}</option>
+                        <option value="1">{values[1] || "Option 2"}</option>
+                        <option value="2">{values[2] || "Option 3"}</option>
+                        <option value="3">{values[3] || "Option 4"}</option>
                     </select>
                 </div>
             </div>
