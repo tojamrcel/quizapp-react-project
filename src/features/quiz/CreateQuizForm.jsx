@@ -12,21 +12,11 @@ function CreateQuizForm() {
         formState: { errors },
     } = useForm()
 
-    const [questionEls, setQuestionEls] = useState([
-        <QuestionForm
-            key={0}
-            questionNum={0}
-            register={register}
-            errors={errors}
-            handleDelete={removeQuestion}
-        />,
-    ])
-
-    const questionsNum = questionEls.length
+    const [questions, setQuestions] = useState(1)
 
     function onSubmit() {
         const values = getValues()
-        const numArr = Array.from({ length: questionsNum }, (_, i) => i)
+        const numArr = Array.from({ length: questions }, (_, i) => i)
         const quiz = {
             title: values.title,
             author: values.author || "anonymous",
@@ -59,26 +49,11 @@ function CreateQuizForm() {
     }
 
     function addQuestion() {
-        const numArr = Array.from({ length: questionsNum + 1 }, (_, i) => i)
-        setQuestionEls(() =>
-            numArr.map((_, i) => {
-                return (
-                    <QuestionForm
-                        key={i}
-                        questionNum={i}
-                        register={register}
-                        errors={errors}
-                        handleDelete={removeQuestion}
-                    />
-                )
-            }),
-        )
+        setQuestions((questions) => questions + 1)
     }
 
-    function removeQuestion(questionNum) {
-        setQuestionEls((questions) => {
-            return questions.filter((q) => q.props.questionNum !== questionNum)
-        })
+    function removeQuestion() {
+        setQuestions((questions) => questions - 1)
     }
 
     return (
@@ -130,7 +105,17 @@ function CreateQuizForm() {
                         </button>
                     </div>
                     <ul className="flex max-h-[30dvh] flex-col gap-6 overflow-auto xs:max-h-[50dvh] md:max-h-[25dvh]">
-                        {questionEls.map((q) => q)}
+                        {Array.from({ length: questions }, (_, i) => i).map(
+                            (_, i) => (
+                                <QuestionForm
+                                    key={i}
+                                    questionNum={i}
+                                    register={register}
+                                    errors={errors}
+                                    handleDelete={removeQuestion}
+                                />
+                            ),
+                        )}
                     </ul>
                 </div>
                 <div className="flex w-full justify-center">
