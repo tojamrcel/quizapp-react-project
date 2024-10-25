@@ -75,7 +75,7 @@ function CreateQuizForm() {
                             },
                         })}
                     />
-                    <div className="h-3">
+                    <div className="-my-1 h-3">
                         {errors?.title?.message ? (
                             <span className="text-sm text-red-800">
                                 {errors?.title?.message}
@@ -83,7 +83,7 @@ function CreateQuizForm() {
                         ) : null}
                     </div>
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="my-2 flex flex-col gap-1">
                     <label className="text-xl" htmlFor="author">
                         Author
                     </label>

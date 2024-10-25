@@ -73,7 +73,7 @@ function QuestionForm({
                         required: "This field is required.",
                     })}
                 />
-                <div className="mb-2 h-2">
+                <div className="-my-1 mb-4 h-2">
                     {errors[`${questionNum}-question`]?.message ? (
                         <span className="text-sm text-red-800">
                             {errors[`${questionNum}-question`].message}
