@@ -114,6 +114,7 @@ function CreateQuizForm() {
                                     errors={errors}
                                     handleDelete={removeQuestion}
                                     setValue={setValue}
+                                    getValues={getValues}
                                 />
                             ),
                         )}

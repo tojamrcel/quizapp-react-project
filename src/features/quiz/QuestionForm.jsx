@@ -10,6 +10,7 @@ function QuestionForm({
     numOfQuestions,
     setValue,
     control,
+    getValues,
 }) {
     const ref = useRef()
     const values = useWatch({
@@ -25,6 +26,22 @@ function QuestionForm({
     useEffect(function () {
         ref.current.scrollIntoView({ behavior: "smooth" })
     }, [])
+
+    function isUniqueValidation(numField, value) {
+        const answers = [
+            getValues()[`${questionNum}-answer-0`],
+            getValues()[`${questionNum}-answer-1`],
+            getValues()[`${questionNum}-answer-2`],
+            getValues()[`${questionNum}-answer-3`],
+        ]
+
+        const validatedArr = answers.map((ans, i) => {
+            if (i === numField) return
+            return value === ans
+        })
+
+        return !validatedArr.includes(true) || "Values have to be unique!"
+    }
 
     return (
         <li
@@ -76,7 +93,7 @@ function QuestionForm({
                         variation="sm"
                         register={register(`${questionNum}-answer-0`, {
                             required: "This field is required.",
-                            validate: () => {},
+                            validate: (value) => isUniqueValidation(0, value),
                         })}
                     />
                 </div>
@@ -86,6 +103,7 @@ function QuestionForm({
                         variation="sm"
                         register={register(`${questionNum}-answer-1`, {
                             required: "This field is required.",
+                            validate: (value) => isUniqueValidation(1, value),
                         })}
                     />
                 </div>
@@ -95,6 +113,7 @@ function QuestionForm({
                         variation="sm"
                         register={register(`${questionNum}-answer-2`, {
                             required: "This field is required.",
+                            validate: (value) => isUniqueValidation(2, value),
                         })}
                     />
                 </div>
@@ -104,6 +123,7 @@ function QuestionForm({
                         variation="sm"
                         register={register(`${questionNum}-answer-3`, {
                             required: "This field is required.",
+                            validate: (value) => isUniqueValidation(3, value),
                         })}
                     />
                 </div>
