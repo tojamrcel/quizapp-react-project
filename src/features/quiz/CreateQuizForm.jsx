@@ -9,6 +9,7 @@ function CreateQuizForm() {
         handleSubmit,
         register,
         getValues,
+        setValue,
         formState: { errors },
     } = useForm()
 
@@ -109,10 +110,12 @@ function CreateQuizForm() {
                             (_, i) => (
                                 <QuestionForm
                                     key={i}
+                                    numOfQuestions={questions}
                                     questionNum={i}
                                     register={register}
                                     errors={errors}
                                     handleDelete={removeQuestion}
+                                    setValue={setValue}
                                 />
                             ),
                         )}
