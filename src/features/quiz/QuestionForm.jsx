@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import Input from "../../ui/Input"
 
-function QuestionForm({ questionNum, register, errors }) {
+function QuestionForm({ questionNum, register, errors, handleDelete }) {
     const ref = useRef()
 
     useEffect(function () {
@@ -18,7 +18,10 @@ function QuestionForm({ questionNum, register, errors }) {
                     <label htmlFor="question" className="-ml-2 text-lg">
                         Question {questionNum + 1}
                     </label>
-                    <button className="flex h-2 w-2 items-center justify-center rounded-full p-[12px] text-lg text-zinc-600 transition-colors duration-300 hover:bg-gray-200">
+                    <button
+                        onClick={() => handleDelete(questionNum)}
+                        className="flex h-2 w-2 items-center justify-center rounded-full p-[12px] text-lg text-zinc-600 transition-colors duration-300 hover:bg-gray-200"
+                    >
                         -
                     </button>
                 </div>
