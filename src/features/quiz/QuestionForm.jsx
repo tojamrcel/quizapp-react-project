@@ -13,14 +13,15 @@ function QuestionForm({
     getValues,
 }) {
     const ref = useRef()
+    const answerFieldNames = [
+        `${questionNum}-answer-0`,
+        `${questionNum}-answer-1`,
+        `${questionNum}-answer-2`,
+        `${questionNum}-answer-3`,
+    ]
     const values = useWatch({
         control,
-        name: [
-            `${questionNum}-answer-0`,
-            `${questionNum}-answer-1`,
-            `${questionNum}-answer-2`,
-            `${questionNum}-answer-3`,
-        ],
+        name: answerFieldNames,
     })
 
     useEffect(function () {
@@ -28,12 +29,7 @@ function QuestionForm({
     }, [])
 
     function isUniqueValidation(numField, value) {
-        const answers = [
-            getValues()[`${questionNum}-answer-0`],
-            getValues()[`${questionNum}-answer-1`],
-            getValues()[`${questionNum}-answer-2`],
-            getValues()[`${questionNum}-answer-3`],
-        ]
+        const answers = answerFieldNames.map((name) => getValues(name))
 
         const validatedArr = answers.map((ans, i) => {
             if (i === numField) return
@@ -57,9 +53,9 @@ function QuestionForm({
                     questionNum + 1 === numOfQuestions ? (
                         <button
                             onClick={() => {
-                                for (let i = 0; i < 4; i++) {
-                                    setValue(`${questionNum}-answer-${i}`, "")
-                                }
+                                answerFieldNames.forEach((name) =>
+                                    setValue(name, ""),
+                                )
 
                                 setValue(`${questionNum}-question`, "")
                                 setValue(`${questionNum}-correctAnswer`, "0")
