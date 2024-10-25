@@ -42,7 +42,7 @@ function QuestionForm({
     return (
         <li
             ref={ref}
-            className={`${questionNum !== 0 ? "border-t-[1px]" : ""} border-gray-200 px-2 py-2`}
+            className={`${questionNum !== 0 ? "border-t-[1px] py-2" : ""} border-gray-200 px-2`}
         >
             <div className="ml-2 flex flex-col gap-1">
                 <div className="flex items-center gap-3">
