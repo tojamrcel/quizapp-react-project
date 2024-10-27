@@ -87,6 +87,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>1.</span>
                     <Input
+                        maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-0`, {
                             required: "This field is required.",
@@ -104,6 +105,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>2.</span>
                     <Input
+                        maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-1`, {
                             required: "This field is required.",
@@ -121,6 +123,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>3.</span>
                     <Input
+                        maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-2`, {
                             required: "This field is required.",
@@ -138,6 +141,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>4.</span>
                     <Input
+                        maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-3`, {
                             required: "This field is required.",
