@@ -73,6 +73,7 @@ function QuestionForm({
                         required: "This field is required.",
                     })}
                 />
+
                 <div className="-my-1 mb-4 h-2">
                     {errors[`${questionNum}-question`]?.message ? (
                         <span className="text-sm text-red-800">
@@ -92,6 +93,13 @@ function QuestionForm({
                             validate: (value) => isUniqueValidation(0, value),
                         })}
                     />
+                    <div className="-my-1 mb-4 h-2">
+                        {errors[`${questionNum}-answer-0`]?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors[`${questionNum}-answer-0`].message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex items-center gap-2">
                     <span>2.</span>
@@ -102,6 +110,13 @@ function QuestionForm({
                             validate: (value) => isUniqueValidation(1, value),
                         })}
                     />
+                    <div className="-my-1 mb-4 h-2">
+                        {errors[`${questionNum}-answer-1`]?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors[`${questionNum}-answer-1`].message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex items-center gap-2">
                     <span>3.</span>
@@ -112,6 +127,13 @@ function QuestionForm({
                             validate: (value) => isUniqueValidation(2, value),
                         })}
                     />
+                    <div className="-my-1 mb-4 h-2">
+                        {errors[`${questionNum}-answer-2`]?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors[`${questionNum}-answer-2`].message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex items-center gap-2">
                     <span>4.</span>
@@ -122,6 +144,13 @@ function QuestionForm({
                             validate: (value) => isUniqueValidation(3, value),
                         })}
                     />
+                    <div className="-my-1 mb-4 h-2">
+                        {errors[`${questionNum}-answer-3`]?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors[`${questionNum}-answer-3`].message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex w-full items-center gap-2">
                     <label htmlFor="correctAnswer" className="text-base">
