@@ -5,7 +5,7 @@ import QuestionForm from "./QuestionForm"
 import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 
-function CreateQuizForm() {
+function CreateQuizForm({ onCloseModal }) {
     const { handleSubmit, register, getValues, setValue, formState, control } =
         useForm()
 
@@ -48,7 +48,9 @@ function CreateQuizForm() {
 
             quiz.questions = [...quiz.questions, question]
         })
+
         createQuiz(quiz)
+        onCloseModal?.()
     }
 
     function addQuestion() {

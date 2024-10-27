@@ -41,7 +41,9 @@ function Window({ children, name }) {
                 >
                     <HiXMark />
                 </button>
-                <div>{children}</div>
+                <div>
+                    {cloneElement(children, { onCloseModal: () => close() })}
+                </div>
             </div>
         </div>,
         document.body,
