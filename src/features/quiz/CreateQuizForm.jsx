@@ -20,6 +20,7 @@ function CreateQuizForm({ onCloseModal }) {
         const id = Date.now()
         const quiz = {
             id,
+            description: values.description,
             title: values.title,
             author: values.author || "anonymous",
             questions: [],
@@ -95,6 +96,27 @@ function CreateQuizForm({ onCloseModal }) {
                         Author
                     </label>
                     <Input register={register("author")} />
+                </div>
+                <div className="flex flex-col gap-1">
+                    <label className="text-xl" htmlFor="description">
+                        Description
+                    </label>
+                    <Input
+                        register={register("description", {
+                            required: "Description is required.",
+                            maxLength: {
+                                value: 64,
+                                message: "Description is too long.",
+                            },
+                        })}
+                    />
+                    <div className="-my-1 h-3">
+                        {errors?.description?.message ? (
+                            <span className="text-sm text-red-800">
+                                {errors?.description?.message}
+                            </span>
+                        ) : null}
+                    </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
                     <div className="flex items-center justify-between">
