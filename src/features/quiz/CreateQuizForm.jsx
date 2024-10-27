@@ -15,7 +15,9 @@ function CreateQuizForm() {
     function onSubmit() {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)
+        const id = Date.now()
         const quiz = {
+            id,
             title: values.title,
             author: values.author || "anonymous",
             questions: [],
