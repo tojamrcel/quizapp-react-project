@@ -96,6 +96,11 @@ function reducer(state, action) {
                         state.activeQuiz.questions.at(0).correctAnswer,
                 },
             }
+        case "createQuiz":
+            return {
+                ...state,
+                quizzes: [...state.quizzes, action.payload],
+            }
     }
 }
 
@@ -110,6 +115,7 @@ function QuizzesProvider({ children }) {
             .then((res) => res.json())
             .then((data) => {
                 dispatch({ type: "dataReceived", payload: data })
+                console.log(data)
             })
             .catch((err) =>
                 dispatch({ type: "dataFailed", payload: err.message }),
@@ -133,6 +139,24 @@ function QuizzesProvider({ children }) {
         })
     }
 
+    async function createQuiz(quiz) {
+        try {
+            const res = await fetch("http://localhost:8000/quizzes", {
+                method: "POST",
+                body: JSON.stringify(quiz),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            if (!res.ok) throw Error("Error")
+            const data = await res.json()
+            dispatch({ type: "createQuiz", payload: data })
+            return data
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    }
+
     return (
         <QuizzesContext.Provider
             value={{
@@ -143,6 +167,7 @@ function QuizzesProvider({ children }) {
                 startQuiz,
                 stopQuiz,
                 dispatch,
+                createQuiz,
             }}
         >
             {children}

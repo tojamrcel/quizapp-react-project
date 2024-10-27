@@ -3,11 +3,13 @@ import Button from "../../ui/Button"
 import Input from "../../ui/Input"
 import QuestionForm from "./QuestionForm"
 import { useState } from "react"
+import { useQuizzes } from "../../contexts/QuizzesContext"
 
 function CreateQuizForm() {
     const { handleSubmit, register, getValues, setValue, formState, control } =
         useForm()
 
+    const { createQuiz } = useQuizzes()
     const { errors } = formState
 
     const [questions, setQuestions] = useState(1)
@@ -46,6 +48,7 @@ function CreateQuizForm() {
 
             quiz.questions = [...quiz.questions, question]
         })
+        createQuiz(quiz)
     }
 
     function addQuestion() {

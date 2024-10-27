@@ -21,7 +21,7 @@ function QuizItem({ quiz }) {
                     {quiz.title}
                 </h2>
                 <p className="text-xs text-gray-600 md:text-base">
-                    {quiz.description}
+                    {quiz.description || `${quiz.title} quiz.`}
                 </p>
                 <button
                     onClick={() => {
