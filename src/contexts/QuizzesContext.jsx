@@ -105,7 +105,7 @@ function reducer(state, action) {
             return {
                 ...state,
                 quizzes: state.quizzes.filter(
-                    (quiz) => quiz.id !== action.payload,
+                    (quiz) => quiz.id !== action.payload.id,
                 ),
             }
     }
