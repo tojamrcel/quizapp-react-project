@@ -17,7 +17,7 @@ function CreateQuizForm({ onCloseModal }) {
     function onSubmit() {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)
-        const id = Date.now()
+        const id = Date.now() + ""
         const quiz = {
             id,
             description: values.description,
