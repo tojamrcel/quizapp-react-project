@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 import { HiPencil, HiTrash } from "react-icons/hi2"
 import Menus, { useMenus } from "../../ui/Menus"
+import Modal from "../../ui/Modal"
 
 function QuizItem({ quiz }) {
     const { openId } = useMenus()
@@ -36,12 +37,14 @@ function QuizItem({ quiz }) {
                     <Menus.Toggle id={quiz.id} />
                 </div>
                 <Menus.List id={quiz.id}>
-                    <Menus.Button
-                        disabled={isDeleteEditDisabled}
-                        icon={<HiTrash />}
-                    >
-                        Delete
-                    </Menus.Button>
+                    <Modal.Open opens="delete">
+                        <Menus.Button
+                            disabled={isDeleteEditDisabled}
+                            icon={<HiTrash />}
+                        >
+                            Delete
+                        </Menus.Button>
+                    </Modal.Open>
                     <Menus.Button
                         disabled={isDeleteEditDisabled}
                         icon={<HiPencil />}
@@ -49,6 +52,7 @@ function QuizItem({ quiz }) {
                         Edit
                     </Menus.Button>
                 </Menus.List>
+                <Modal.Window name="delete"></Modal.Window>
             </Menus.Menu>
         </li>
     )
