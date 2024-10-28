@@ -25,12 +25,12 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
     const { openName, close } = useContext(ModalContext)
-    const ref = useOutsideClick(close, true)
+    const ref = useOutsideClick(close)
 
     if (openName !== name) return null
 
     return createPortal(
-        <div className="fixed bottom-0 top-0 z-10 h-[100dvh] w-full backdrop-blur-md">
+        <div className="fixed bottom-0 top-0 h-[100dvh] w-full backdrop-blur-md">
             <div
                 ref={ref}
                 className="fixed left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 overflow-auto bg-gray-300 px-[1.6rem] py-[2rem] shadow-md sm:overflow-hidden md:h-auto md:w-auto md:rounded-xl md:px-[3.2rem] md:py-[4rem]"
@@ -41,9 +41,7 @@ function Window({ children, name }) {
                 >
                     <HiXMark />
                 </button>
-                <div>
-                    {cloneElement(children, { onCloseModal: () => close() })}
-                </div>
+                <div>{cloneElement(children, { onCloseModal: close })}</div>
             </div>
         </div>,
         document.body,
