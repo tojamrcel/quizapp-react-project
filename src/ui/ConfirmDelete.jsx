@@ -1,4 +1,4 @@
-function ConfirmDelete({ onCloseModal }) {
+function ConfirmDelete({ onCloseModal, onConfirm }) {
     return (
         <div className="flex max-w-[40rem] flex-col gap-[1.2rem]">
             <h3 className="text-3xl font-bold">Delete Quiz</h3>
@@ -10,7 +10,12 @@ function ConfirmDelete({ onCloseModal }) {
                 <button className="text-zinc-700 hover:text-zinc-900">
                     Cancel
                 </button>
-                <button className="transition-color text-md rounded-md bg-red-700 px-[1.6rem] py-[1rem] font-bold text-gray-300 duration-200 hover:bg-red-800">
+                <button
+                    onClick={() => {
+                        onCloseModal()
+                    }}
+                    className="transition-color text-md rounded-md bg-red-700 px-[1.6rem] py-[1rem] font-bold text-gray-300 duration-200 hover:bg-red-800"
+                >
                     Delete
                 </button>
             </div>
