@@ -14,7 +14,7 @@ function QuizItem({ quiz }) {
 
     return (
         <li
-            className={`${openId === quiz.id ? "z-10 translate-x-[2px]" : "transition-transform duration-300 hover:translate-x-[2px]"} relative flex max-h-[12rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8`}
+            className={`${openId === quiz.id ? "translate-x-[2px]" : "transition-transform duration-300 hover:translate-x-[2px]"} relative flex max-h-[12rem] max-w-full cursor-default flex-col items-start justify-center gap-1 rounded-md border bg-gray-300 p-8`}
             key={quiz.id}
         >
             <Menus.Menu>
@@ -52,7 +52,23 @@ function QuizItem({ quiz }) {
                         Edit
                     </Menus.Button>
                 </Menus.List>
-                <Modal.Window name="delete"></Modal.Window>
+                <Modal.Window name="delete">
+                    <div className="flex max-w-[40rem] flex-col gap-[1.2rem]">
+                        <h3 className="text-3xl font-bold">Delete Quiz</h3>
+                        <p className="text-md mb-[1.2rem] text-zinc-800">
+                            Are you sure you want to delete this quiz
+                            permamently? This action cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-6">
+                            <button className="text-zinc-800 hover:text-zinc-900">
+                                Cancel
+                            </button>
+                            <button className="transition-color text-md rounded-md bg-red-700 px-[1.6rem] py-[1rem] text-gray-300 duration-200 hover:bg-red-800">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </Modal.Window>
             </Menus.Menu>
         </li>
     )
