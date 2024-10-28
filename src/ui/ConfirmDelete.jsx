@@ -12,6 +12,7 @@ function ConfirmDelete({ onCloseModal, onConfirm }) {
                 </button>
                 <button
                     onClick={() => {
+                        onConfirm?.()
                         onCloseModal()
                     }}
                     className="transition-color text-md rounded-md bg-red-700 px-[1.6rem] py-[1rem] font-bold text-gray-300 duration-200 hover:bg-red-800"

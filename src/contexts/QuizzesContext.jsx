@@ -101,6 +101,13 @@ function reducer(state, action) {
                 ...state,
                 quizzes: [...state.quizzes, action.payload],
             }
+        case "removeQuiz":
+            return {
+                ...state,
+                quizzes: state.quizzes.filter(
+                    (quiz) => quiz.id !== action.payload,
+                ),
+            }
     }
 }
 
@@ -157,6 +164,23 @@ function QuizzesProvider({ children }) {
         }
     }
 
+    async function deleteQuiz(quizId) {
+        try {
+            const res = await fetch(`http://localhost:8000/quizzes/${quizId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            if (!res.ok) throw Error("Error")
+            const data = await res.json()
+            dispatch({ type: "removeQuiz", payload: data })
+            return data
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    }
+
     return (
         <QuizzesContext.Provider
             value={{
@@ -168,6 +192,7 @@ function QuizzesProvider({ children }) {
                 stopQuiz,
                 dispatch,
                 createQuiz,
+                deleteQuiz,
             }}
         >
             {children}

@@ -288,24 +288,6 @@
                     "correctAnswer": 0
                 }
             ]
-        },
-        {
-            "id": "1730068168252",
-            "description": "Quiz about Marcel.",
-            "title": "Quiz about me.",
-            "author": "Marcel",
-            "questions": [
-                {
-                    "question": "What's Marcel's name?",
-                    "answers": ["Marcel", "Złomek", "Elvis", "Cebab"],
-                    "correctAnswer": 0
-                },
-                {
-                    "question": "How old is he?",
-                    "answers": ["7", "18", "20", "19"],
-                    "correctAnswer": 3
-                }
-            ]
         }
     ]
 }

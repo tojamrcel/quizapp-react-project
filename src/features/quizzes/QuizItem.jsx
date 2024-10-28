@@ -7,7 +7,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete"
 
 function QuizItem({ quiz }) {
     const { openId } = useMenus()
-    const { startQuiz } = useQuizzes()
+    const { startQuiz, deleteQuiz } = useQuizzes()
     const navigate = useNavigate()
 
     const isDeleteEditDisabled =
@@ -55,7 +55,7 @@ function QuizItem({ quiz }) {
                         </Menus.Button>
                     </Menus.List>
                     <Modal.Window name="delete">
-                        <ConfirmDelete />
+                        <ConfirmDelete onConfirm={() => deleteQuiz(quiz.id)} />
                     </Modal.Window>
                 </Menus.Menu>
             </Modal>
