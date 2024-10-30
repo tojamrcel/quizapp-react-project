@@ -22,13 +22,7 @@ function CreateQuizForm({ onCloseModal, quiz }) {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)
         const id = Date.now() + ""
-        const quiz = {
-            id,
-            description: values.description,
-            title: values.title,
-            author: values.author || "anonymous",
-            questions: [],
-        }
+        const newQuizQuestions = isEditing ? [...quiz.questions] : []
 
         numArr.forEach((i) => {
             const question = {
@@ -51,10 +45,31 @@ function CreateQuizForm({ onCloseModal, quiz }) {
                 }
             })
 
-            quiz.questions = [...quiz.questions, question]
+            newQuizQuestions.push(question)
         })
 
-        createQuiz(quiz)
+        if (isEditing) {
+            const newQuiz = {
+                ...quiz,
+                description: values.description,
+                title: values.title,
+                author: values.author || "anonymous",
+                questions: [...newQuizQuestions],
+            }
+            // editQuiz?.(quiz)
+        }
+
+        if (!isEditing) {
+            const newQuiz = {
+                id,
+                description: values.description,
+                title: values.title,
+                author: values.author || "anonymous",
+                questions: [...newQuizQuestions],
+            }
+            createQuiz(newQuiz)
+        }
+
         onCloseModal?.()
     }
 
@@ -171,7 +186,9 @@ function CreateQuizForm({ onCloseModal, quiz }) {
                     </ul>
                 </div>
                 <div className="flex w-full justify-center">
-                    <Button type="wide">Create Quiz</Button>
+                    <Button type="wide">
+                        {isEditing ? "Edit" : "Create"} Quiz
+                    </Button>
                 </div>
             </form>
         </div>
