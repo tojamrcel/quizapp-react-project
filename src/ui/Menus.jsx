@@ -67,7 +67,7 @@ function Button({ children, icon, onClick, disabled }) {
             <button
                 disabled={disabled}
                 onClick={handleClick}
-                className={`flex w-full items-center gap-4 px-[1.4rem] py-[0.7rem] hover:bg-zinc-200 disabled:text-zinc-400`}
+                className={`flex w-full items-center gap-4 px-[1.4rem] py-[0.7rem] transition-colors duration-150 hover:bg-zinc-200 disabled:text-zinc-400`}
             >
                 {icon}{" "}
                 <span
