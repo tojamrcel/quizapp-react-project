@@ -325,36 +325,18 @@
       ]
     },
     {
-      "id": "1730317723320",
-      "description": "123",
+      "id": "1730319621168",
+      "description": "3223",
       "title": "test",
-      "author": "123123",
+      "author": "213123",
       "questions": [
         {
-          "question": "12312",
+          "question": "232",
           "answers": [
-            "3122321",
+            "32323",
             "23",
-            "312",
-            "3123"
-          ],
-          "correctAnswer": 0
-        }
-      ]
-    },
-    {
-      "id": "1730318581235",
-      "description": "321321",
-      "title": "test323",
-      "author": "23213",
-      "questions": [
-        {
-          "question": "321",
-          "answers": [
-            "321",
-            "32",
-            "33232",
-            "3232"
+            "232",
+            "312312"
           ],
           "correctAnswer": 1
         }

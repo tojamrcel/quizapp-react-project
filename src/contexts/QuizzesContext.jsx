@@ -118,15 +118,7 @@ function QuizzesProvider({ children }) {
     )
 
     useEffect(function () {
-        fetch("http://localhost:8000/quizzes")
-            .then((res) => res.json())
-            .then((data) => {
-                dispatch({ type: "dataReceived", payload: data })
-                console.log(data)
-            })
-            .catch((err) =>
-                dispatch({ type: "dataFailed", payload: err.message }),
-            )
+        fetchQuizzes()
     }, [])
 
     function startQuiz(quiz) {
@@ -144,6 +136,18 @@ function QuizzesProvider({ children }) {
         dispatch({
             type: "stopQuiz",
         })
+    }
+
+    async function fetchQuizzes() {
+        fetch("http://localhost:8000/quizzes")
+            .then((res) => res.json())
+            .then((data) => {
+                dispatch({ type: "dataReceived", payload: data })
+                console.log(data)
+            })
+            .catch((err) =>
+                dispatch({ type: "dataFailed", payload: err.message }),
+            )
     }
 
     async function createQuiz(quiz) {
@@ -195,8 +199,7 @@ function QuizzesProvider({ children }) {
             )
             if (!res.ok) throw Error("Error")
             const data = await res.json()
-            // dispatch({ type: "editQuiz", payload: data })
-            console.log(data)
+            fetchQuizzes()
             return data
         } catch (err) {
             throw new Error(err.message)
