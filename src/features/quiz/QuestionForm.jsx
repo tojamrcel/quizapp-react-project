@@ -3,6 +3,7 @@ import Input from "../../ui/Input"
 import { useWatch } from "react-hook-form"
 
 function QuestionForm({
+    question = "",
     questionNum,
     register,
     errors,
@@ -68,6 +69,7 @@ function QuestionForm({
                     ) : null}
                 </div>
                 <Input
+                    defaultValue={question ? question.question : ""}
                     variation="sm"
                     register={register(`${questionNum}-question`, {
                         required: "This field is required.",
@@ -89,6 +91,7 @@ function QuestionForm({
                     <Input
                         maxChar={32}
                         variation="sm"
+                        defaultValue={question ? question.answers[0] : ""}
                         register={register(`${questionNum}-answer-0`, {
                             required: "This field is required.",
                             validate: (value) => isUniqueValidation(0, value),
@@ -105,6 +108,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>2.</span>
                     <Input
+                        defaultValue={question ? question.answers[1] : ""}
                         maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-1`, {
@@ -123,6 +127,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>3.</span>
                     <Input
+                        defaultValue={question ? question.answers[2] : ""}
                         maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-2`, {
@@ -141,6 +146,7 @@ function QuestionForm({
                 <div className="flex items-center gap-2">
                     <span>4.</span>
                     <Input
+                        defaultValue={question ? question.answers[3] : ""}
                         maxChar={32}
                         variation="sm"
                         register={register(`${questionNum}-answer-3`, {
@@ -161,16 +167,25 @@ function QuestionForm({
                         Correct answer
                     </label>
                     <select
+                        defaultValue={question?.correctAnswer}
                         className="h-8 w-[25%] border-violet-800 bg-gray-100 outline-none focus:border-2"
                         name="correctAnswer"
                         {...register(`${questionNum}-correctAnswer`, {
                             required: "This field is required.",
                         })}
                     >
-                        <option value="0">{values[0] || "Option 1"}</option>
-                        <option value="1">{values[1] || "Option 2"}</option>
-                        <option value="2">{values[2] || "Option 3"}</option>
-                        <option value="3">{values[3] || "Option 4"}</option>
+                        <option value="0">
+                            {values[0] || question?.answers[0] || "Option 1"}
+                        </option>
+                        <option value="1">
+                            {values[1] || question?.answers[0] || "Option 2"}
+                        </option>
+                        <option value="2">
+                            {values[2] || question?.answers[0] || "Option 3"}
+                        </option>
+                        <option value="3">
+                            {values[3] || question?.answers[0] || "Option 4"}
+                        </option>
                     </select>
                 </div>
             </div>

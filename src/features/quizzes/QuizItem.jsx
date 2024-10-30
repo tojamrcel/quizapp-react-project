@@ -4,6 +4,7 @@ import { HiPencil, HiTrash } from "react-icons/hi2"
 import Menus, { useMenus } from "../../ui/Menus"
 import Modal from "../../ui/Modal"
 import ConfirmDelete from "../../ui/ConfirmDelete"
+import CreateQuizForm from "../quiz/CreateQuizForm"
 
 function QuizItem({ quiz }) {
     const { openId } = useMenus()
@@ -47,15 +48,20 @@ function QuizItem({ quiz }) {
                                 Delete
                             </Menus.Button>
                         </Modal.Open>
-                        <Menus.Button
-                            disabled={isDeleteEditDisabled}
-                            icon={<HiPencil />}
-                        >
-                            Edit
-                        </Menus.Button>
+                        <Modal.Open opens="edit">
+                            <Menus.Button
+                                disabled={isDeleteEditDisabled}
+                                icon={<HiPencil />}
+                            >
+                                Edit
+                            </Menus.Button>
+                        </Modal.Open>
                     </Menus.List>
                     <Modal.Window name="delete">
                         <ConfirmDelete onConfirm={() => deleteQuiz(quiz.id)} />
+                    </Modal.Window>
+                    <Modal.Window name="edit">
+                        <CreateQuizForm quiz={quiz} />
                     </Modal.Window>
                 </Menus.Menu>
             </Modal>

@@ -5,15 +5,19 @@ import QuestionForm from "./QuestionForm"
 import { useState } from "react"
 import { useQuizzes } from "../../contexts/QuizzesContext"
 
-function CreateQuizForm({ onCloseModal }) {
+function CreateQuizForm({ onCloseModal, quiz }) {
     const { handleSubmit, register, getValues, setValue, formState, control } =
         useForm()
 
     const { createQuiz } = useQuizzes()
     const { errors } = formState
 
-    const [questions, setQuestions] = useState(1)
+    const isEditing = Boolean(quiz)
+    const [questions, setQuestions] = useState(
+        isEditing ? quiz.questions.length : 1,
+    )
 
+    console.log(quiz.questions)
     function onSubmit() {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)
@@ -64,7 +68,9 @@ function CreateQuizForm({ onCloseModal }) {
 
     return (
         <div>
-            <h1 className="my-4 text-4xl font-bold">Create Quiz</h1>
+            <h1 className="my-4 text-4xl font-bold">
+                {isEditing ? "Edit" : "Create"} Quiz
+            </h1>
             <form
                 method="get"
                 className="flex flex-col gap-3"
@@ -75,6 +81,7 @@ function CreateQuizForm({ onCloseModal }) {
                         Title
                     </label>
                     <Input
+                        defaultValue={isEditing ? quiz.title : ""}
                         register={register("title", {
                             required: "Title is required.",
                             maxLength: {
@@ -95,13 +102,24 @@ function CreateQuizForm({ onCloseModal }) {
                     <label className="text-xl" htmlFor="author">
                         Author
                     </label>
-                    <Input register={register("author")} />
+
+                    <Input
+                        defaultValue={
+                            isEditing
+                                ? quiz.author !== "anonymous"
+                                    ? quiz.author
+                                    : ""
+                                : ""
+                        }
+                        register={register("author")}
+                    />
                 </div>
                 <div className="flex flex-col gap-1">
                     <label className="text-xl" htmlFor="description">
                         Description
                     </label>
                     <Input
+                        defaultValue={isEditing ? quiz.description : ""}
                         register={register("description", {
                             required: "Description is required.",
                             maxLength: {
@@ -135,6 +153,9 @@ function CreateQuizForm({ onCloseModal }) {
                         {Array.from({ length: questions }, (_, i) => i).map(
                             (_, i) => (
                                 <QuestionForm
+                                    question={
+                                        isEditing ? quiz.questions[i] : ""
+                                    }
                                     control={control}
                                     key={i}
                                     numOfQuestions={questions}
