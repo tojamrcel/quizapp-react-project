@@ -9,7 +9,7 @@ function CreateQuizForm({ onCloseModal, quiz }) {
     const { handleSubmit, register, getValues, setValue, formState, control } =
         useForm()
 
-    const { createQuiz } = useQuizzes()
+    const { createQuiz, editQuiz } = useQuizzes()
     const { errors } = formState
 
     const isEditing = Boolean(quiz)
@@ -22,7 +22,7 @@ function CreateQuizForm({ onCloseModal, quiz }) {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)
         const id = Date.now() + ""
-        const newQuizQuestions = isEditing ? [...quiz.questions] : []
+        const newQuizQuestions = []
 
         numArr.forEach((i) => {
             const question = {
@@ -56,7 +56,8 @@ function CreateQuizForm({ onCloseModal, quiz }) {
                 author: values.author || "anonymous",
                 questions: [...newQuizQuestions],
             }
-            // editQuiz?.(quiz)
+            console.log(newQuiz)
+            editQuiz(newQuiz)
         }
 
         if (!isEditing) {

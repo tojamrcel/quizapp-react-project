@@ -181,6 +181,28 @@ function QuizzesProvider({ children }) {
         }
     }
 
+    async function editQuiz(quiz) {
+        try {
+            const res = await fetch(
+                `http://localhost:8000/quizzes/${quiz.id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(quiz),
+                },
+            )
+            if (!res.ok) throw Error("Error")
+            const data = await res.json()
+            // dispatch({ type: "editQuiz", payload: data })
+            console.log(data)
+            return data
+        } catch (err) {
+            throw new Error(err.message)
+        }
+    }
+
     return (
         <QuizzesContext.Provider
             value={{
@@ -193,6 +215,7 @@ function QuizzesProvider({ children }) {
                 dispatch,
                 createQuiz,
                 deleteQuiz,
+                editQuiz,
             }}
         >
             {children}
