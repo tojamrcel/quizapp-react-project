@@ -38,6 +38,7 @@ function reducer(state, action) {
                     id: action.payload.id,
                     currentQuestion: 0,
                     answer: null,
+                    corrects: 0,
                     questions: action.payload.questions,
                     correctAnswer: action.payload.correctAnswer,
                 },
