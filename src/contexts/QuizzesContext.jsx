@@ -96,11 +96,6 @@ function reducer(state, action) {
                         state.activeQuiz.questions.at(0).correctAnswer,
                 },
             }
-        case "createQuiz":
-            return {
-                ...state,
-                quizzes: [...state.quizzes, action.payload],
-            }
     }
 }
 
@@ -136,7 +131,6 @@ function QuizzesProvider({ children }) {
             .then((res) => res.json())
             .then((data) => {
                 dispatch({ type: "dataReceived", payload: data })
-                console.log(data)
             })
             .catch((err) =>
                 dispatch({ type: "dataFailed", payload: err.message }),
@@ -154,7 +148,7 @@ function QuizzesProvider({ children }) {
             })
             if (!res.ok) throw Error("Error")
             const data = await res.json()
-            dispatch({ type: "createQuiz", payload: data })
+            fetchQuizzes()
             return data
         } catch (err) {
             throw new Error(err.message)
