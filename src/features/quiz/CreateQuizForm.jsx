@@ -17,7 +17,7 @@ function CreateQuizForm({ onCloseModal, quiz }) {
         isEditing ? quiz.questions.length : 1,
     )
 
-    console.log(quiz.questions)
+    // console.log(quiz.questions)
     function onSubmit() {
         const values = getValues()
         const numArr = Array.from({ length: questions }, (_, i) => i)

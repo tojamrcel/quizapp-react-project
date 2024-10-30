@@ -26,6 +26,7 @@ function QuestionForm({
     })
 
     useEffect(function () {
+        if (question) return
         ref.current.scrollIntoView({ behavior: "smooth" })
     }, [])
 
@@ -175,16 +176,24 @@ function QuestionForm({
                         })}
                     >
                         <option value="0">
-                            {values[0] || question?.answers[0] || "Option 1"}
+                            {values[0] ||
+                                question?.answers?.at(0) ||
+                                "Option 1"}
                         </option>
                         <option value="1">
-                            {values[1] || question?.answers[0] || "Option 2"}
+                            {values[1] ||
+                                question?.answers?.at(1) ||
+                                "Option 2"}
                         </option>
                         <option value="2">
-                            {values[2] || question?.answers[0] || "Option 3"}
+                            {values[2] ||
+                                question?.answers?.at(2) ||
+                                "Option 3"}
                         </option>
                         <option value="3">
-                            {values[3] || question?.answers[0] || "Option 4"}
+                            {values[3] ||
+                                question?.answers?.at(3) ||
+                                "Option 4"}
                         </option>
                     </select>
                 </div>
