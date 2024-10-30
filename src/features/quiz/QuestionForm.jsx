@@ -25,10 +25,13 @@ function QuestionForm({
         name: answerFieldNames,
     })
 
-    useEffect(function () {
-        if (question) return
-        ref.current.scrollIntoView({ behavior: "smooth" })
-    }, [])
+    useEffect(
+        function () {
+            if (question) return
+            ref.current.scrollIntoView({ behavior: "smooth" })
+        },
+        [question],
+    )
 
     function isUniqueValidation(numField, value) {
         const answers = answerFieldNames.map((name) => getValues(name))

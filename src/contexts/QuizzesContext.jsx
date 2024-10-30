@@ -101,13 +101,6 @@ function reducer(state, action) {
                 ...state,
                 quizzes: [...state.quizzes, action.payload],
             }
-        case "removeQuiz":
-            return {
-                ...state,
-                quizzes: state.quizzes.filter(
-                    (quiz) => quiz.id !== action.payload.id,
-                ),
-            }
     }
 }
 
@@ -178,7 +171,7 @@ function QuizzesProvider({ children }) {
             })
             if (!res.ok) throw Error("Error")
             const data = await res.json()
-            dispatch({ type: "removeQuiz", payload: data })
+            fetchQuizzes()
             return data
         } catch (err) {
             throw new Error(err.message)
