@@ -323,24 +323,6 @@
           "correctAnswer": 0
         }
       ]
-    },
-    {
-      "id": "1730314635788",
-      "description": "12312",
-      "title": "test",
-      "author": "21312",
-      "questions": [
-        {
-          "question": "32",
-          "answers": [
-            "323",
-            "23",
-            "232",
-            "233232"
-          ],
-          "correctAnswer": 0
-        }
-      ]
     }
   ]
 }

@@ -7,7 +7,10 @@ function ConfirmDelete({ onCloseModal, onConfirm }) {
                 action cannot be undone.
             </p>
             <div className="flex justify-end gap-6">
-                <button className="text-zinc-700 hover:text-zinc-900">
+                <button
+                    onClick={onCloseModal}
+                    className="text-zinc-700 hover:text-zinc-900"
+                >
                     Cancel
                 </button>
                 <button
