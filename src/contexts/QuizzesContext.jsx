@@ -495,7 +495,7 @@ function QuizzesProvider({ children }) {
             // const data = await res.json()
             // fetchQuizzes()
             // return data
-            setLocalQuizzes([...quizzes.filter((quiz) => quiz.id !== quizId)])
+            setLocalQuizzes(quizzes.filter((quiz) => quiz.id !== quizId))
         } catch (err) {
             throw new Error(err.message)
         }
