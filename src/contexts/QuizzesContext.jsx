@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react"
+import { useLocalStorage } from "../hooks/useLocalStorage"
 
 const QuizzesContext = createContext()
 
@@ -394,21 +395,7 @@ function reducer(state, action) {
                         state.activeQuiz.questions.at(0).correctAnswer,
                 },
             }
-        case "createQuiz":
-            return {
-                ...state,
-                quizzes: [...state.quizzes, action.payload],
-            }
 
-        case "deleteQuiz":
-            return {
-                ...state,
-                quizzes: [
-                    ...state.quizzes.filter(
-                        (quiz) => quiz.id !== action.payload,
-                    ),
-                ],
-            }
         //  CASE editQuiz IS USED ONLY FOR NO API VERSION OF APP
         case "editQuiz": {
             return {
@@ -430,10 +417,22 @@ function QuizzesProvider({ children }) {
         initialState,
     )
 
-    useEffect(function () {
-        // fetchQuizzes()
-        dispatch({ type: "dataReceived", payload: quizzesArray })
-    }, [])
+    const [localQuizzes, setLocalQuizzes] = useLocalStorage(
+        quizzesArray,
+        "quizzes",
+    )
+
+    useEffect(
+        function () {
+            // fetchQuizzes()
+            dispatch({
+                type: "dataReceived",
+                payload:
+                    localQuizzes.length !== 0 ? localQuizzes : quizzesArray,
+            })
+        },
+        [localQuizzes],
+    )
 
     function startQuiz(quiz) {
         dispatch({
@@ -478,7 +477,7 @@ function QuizzesProvider({ children }) {
 
             // fetchQuizzes()
             // return data
-            dispatch({ type: "createQuiz", payload: quiz })
+            setLocalQuizzes([...quizzes, quiz])
         } catch (err) {
             throw new Error(err.message)
         }
@@ -496,7 +495,7 @@ function QuizzesProvider({ children }) {
             // const data = await res.json()
             // fetchQuizzes()
             // return data
-            dispatch({ type: "deleteQuiz", payload: quizId })
+            setLocalQuizzes([...quizzes.filter((quiz) => quiz.id !== quizId)])
         } catch (err) {
             throw new Error(err.message)
         }
@@ -518,7 +517,11 @@ function QuizzesProvider({ children }) {
             // const data = await res.json()
             // fetchQuizzes()
             // return data
-            dispatch({ type: "editQuiz", payload: quiz })
+            setLocalQuizzes(
+                [...quizzes.filter((q) => q.id !== quiz.id), quiz].sort(
+                    (a, b) => a.id - b.id,
+                ),
+            )
         } catch (err) {
             throw new Error(err.message)
         }
