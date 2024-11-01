@@ -409,6 +409,18 @@ function reducer(state, action) {
                     ),
                 ],
             }
+        //  CASE editQuiz IS USED ONLY FOR NO API VERSION OF APP
+        case "editQuiz": {
+            return {
+                ...state,
+                quizzes: [
+                    ...state.quizzes.filter(
+                        (quiz) => quiz.id !== action.payload.id,
+                    ),
+                    action.payload,
+                ].sort((a, b) => a.id - b.id),
+            }
+        }
     }
 }
 
@@ -440,6 +452,7 @@ function QuizzesProvider({ children }) {
         })
     }
 
+    // USED WHEN QUIZZEs ARE STORED IN API
     async function fetchQuizzes() {
         fetch("http://localhost:8000/quizzes")
             .then((res) => res.json())
@@ -491,20 +504,21 @@ function QuizzesProvider({ children }) {
 
     async function editQuiz(quiz) {
         try {
-            const res = await fetch(
-                `http://localhost:8000/quizzes/${quiz.id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(quiz),
-                },
-            )
-            if (!res.ok) throw Error("Error")
-            const data = await res.json()
-            fetchQuizzes()
-            return data
+            // const res = await fetch(
+            //     `http://localhost:8000/quizzes/${quiz.id}`,
+            //     {
+            //         method: "PUT",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         body: JSON.stringify(quiz),
+            //     },
+            // )
+            // if (!res.ok) throw Error("Error")
+            // const data = await res.json()
+            // fetchQuizzes()
+            // return data
+            dispatch({ type: "editQuiz", payload: quiz })
         } catch (err) {
             throw new Error(err.message)
         }
