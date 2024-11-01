@@ -297,24 +297,6 @@ const quizzesArray = [
             },
         ],
     },
-    {
-        id: "1730323160290",
-        description: "quiz testowy 2",
-        title: "quiz testowy 2",
-        author: "anonymous",
-        questions: [
-            {
-                question: "siema",
-                answers: ["siemaelo", "elo", "siemanelo", "super"],
-                correctAnswer: 2,
-            },
-            {
-                question: "neeew yooork",
-                answers: ["concrete", "jungle", "where", "dreams are made off"],
-                correctAnswer: 3,
-            },
-        ],
-    },
 ]
 
 const initialState = {
