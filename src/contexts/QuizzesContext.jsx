@@ -412,6 +412,11 @@ function reducer(state, action) {
                         state.activeQuiz.questions.at(0).correctAnswer,
                 },
             }
+        case "createQuiz":
+            return {
+                ...state,
+                quizzes: [...state.quizzes, action.payload],
+            }
     }
 }
 
@@ -421,13 +426,10 @@ function QuizzesProvider({ children }) {
         initialState,
     )
 
-    useEffect(
-        function () {
-            // fetchQuizzes()
-            dispatch({ type: "dataReceived", payload: quizzesArray })
-        },
-        [quizzes],
-    )
+    useEffect(function () {
+        // fetchQuizzes()
+        dispatch({ type: "dataReceived", payload: quizzesArray })
+    }, [])
 
     function startQuiz(quiz) {
         dispatch({
@@ -459,17 +461,21 @@ function QuizzesProvider({ children }) {
 
     async function createQuiz(quiz) {
         try {
-            const res = await fetch("http://localhost:8000/quizzes", {
-                method: "POST",
-                body: JSON.stringify(quiz),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            if (!res.ok) throw Error("Error")
-            const data = await res.json()
-            fetchQuizzes()
-            return data
+            // const res = await fetch("http://localhost:8000/quizzes", {
+            //     method: "POST",
+            //     body: JSON.stringify(quiz),
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            // if (!res.ok) throw Error("Error")
+            // const data = await res.json()
+
+            // fetchQuizzes()
+            // return data
+            console.log(quiz)
+            console.log(quizzes)
+            dispatch({ type: "createQuiz", payload: quiz })
         } catch (err) {
             throw new Error(err.message)
         }
