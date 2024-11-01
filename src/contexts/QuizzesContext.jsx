@@ -417,6 +417,16 @@ function reducer(state, action) {
                 ...state,
                 quizzes: [...state.quizzes, action.payload],
             }
+
+        case "deleteQuiz":
+            return {
+                ...state,
+                quizzes: [
+                    ...state.quizzes.filter(
+                        (quiz) => quiz.id !== action.payload,
+                    ),
+                ],
+            }
     }
 }
 
@@ -473,8 +483,6 @@ function QuizzesProvider({ children }) {
 
             // fetchQuizzes()
             // return data
-            console.log(quiz)
-            console.log(quizzes)
             dispatch({ type: "createQuiz", payload: quiz })
         } catch (err) {
             throw new Error(err.message)
@@ -483,16 +491,17 @@ function QuizzesProvider({ children }) {
 
     async function deleteQuiz(quizId) {
         try {
-            const res = await fetch(`http://localhost:8000/quizzes/${quizId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            if (!res.ok) throw Error("Error")
-            const data = await res.json()
-            fetchQuizzes()
-            return data
+            // const res = await fetch(`http://localhost:8000/quizzes/${quizId}`, {
+            //     method: "DELETE",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            // if (!res.ok) throw Error("Error")
+            // const data = await res.json()
+            // fetchQuizzes()
+            // return data
+            dispatch({ type: "deleteQuiz", payload: quizId })
         } catch (err) {
             throw new Error(err.message)
         }
