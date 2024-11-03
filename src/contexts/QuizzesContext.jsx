@@ -479,7 +479,9 @@ function QuizzesProvider({ children }) {
             // fetchQuizzes()
             // return data
             setLocalQuizzes([...quizzes, quiz])
+            toast.success("Quiz successfully created.")
         } catch (err) {
+            toast.error("Couldn't create new quiz.")
             throw new Error(err.message)
         }
     }
@@ -497,7 +499,9 @@ function QuizzesProvider({ children }) {
             // fetchQuizzes()
             // return data
             setLocalQuizzes(quizzes.filter((quiz) => quiz.id !== quizId))
+            toast.success("Quiz successfully deleted.")
         } catch (err) {
+            toast.error("Couldn't delete quiz.")
             throw new Error(err.message)
         }
     }
@@ -523,7 +527,9 @@ function QuizzesProvider({ children }) {
                     (a, b) => a.id - b.id,
                 ),
             )
+            toast.success("Quiz successfully edited.")
         } catch (err) {
+            toast.error("Couldn't edit quiz.")
             throw new Error(err.message)
         }
     }
