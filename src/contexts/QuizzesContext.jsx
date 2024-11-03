@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react"
 import { useLocalStorage } from "../hooks/useLocalStorage"
+import toast from "react-hot-toast"
 
 const QuizzesContext = createContext()
 

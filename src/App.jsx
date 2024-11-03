@@ -5,6 +5,7 @@ import Quiz from "./pages/Quiz"
 import Result from "./pages/Result"
 import ProtectedRoute from "./ui/ProtectedRoute"
 import PageNotFound from "./pages/PageNotFound"
+import { Toaster } from "react-hot-toast"
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
             </Routes>
+            <Toaster position="top-center" />
         </BrowserRouter>
     )
 }
