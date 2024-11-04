@@ -29,7 +29,14 @@ function App() {
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
             </Routes>
-            <Toaster position="top-center" />
+            <Toaster
+                position="top-center"
+                toastOptions={{
+                    style: {
+                        padding: "16px 32px",
+                    },
+                }}
+            />
         </BrowserRouter>
     )
 }
