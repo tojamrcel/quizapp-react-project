@@ -3,8 +3,8 @@ import QuizzesList from "../features/quizzes/QuizzesList"
 function Quizzes() {
     return (
         <>
-            <div className="flex min-h-16 items-center justify-center bg-violet-800">
-                <p className="text-center text-gray-300">
+            <div className="flex min-h-12 items-center justify-center bg-violet-800 md:min-h-16">
+                <p className="text-center text-sm text-gray-300 md:text-lg">
                     👋 FOR DEMO VERSION OF APP ALL API FEATURES HAVE BEEN
                     IMPLEMENTED LOCALLY
                 </p>
