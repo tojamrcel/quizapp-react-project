@@ -2,6 +2,7 @@ import { cloneElement, createContext, useContext, useState } from "react"
 import { createPortal } from "react-dom"
 import { HiXMark } from "react-icons/hi2"
 import { useOutsideClick } from "../hooks/useOutsideClick"
+import { useOnKey } from "../hooks/useOnKey"
 
 const ModalContext = createContext()
 
@@ -26,7 +27,7 @@ function Open({ children, opens: opensWindowName }) {
 function Window({ children, name }) {
     const { openName, close } = useContext(ModalContext)
     const ref = useOutsideClick(close)
-
+    useOnKey("escape", close)
     if (openName !== name) return null
 
     return createPortal(
