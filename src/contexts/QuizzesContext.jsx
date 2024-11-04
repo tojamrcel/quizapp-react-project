@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useReducer } from "react"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import toast from "react-hot-toast"
@@ -453,7 +454,7 @@ function QuizzesProvider({ children }) {
     }
 
     // USED WHEN QUIZZEs ARE STORED IN API
-    async function fetchQuizzes() {
+    /*     async function fetchQuizzes() {
         fetch("http://localhost:8000/quizzes")
             .then((res) => res.json())
             .then((data) => {
@@ -462,7 +463,7 @@ function QuizzesProvider({ children }) {
             .catch((err) =>
                 dispatch({ type: "dataFailed", payload: err.message }),
             )
-    }
+    } */
 
     async function createQuiz(quiz) {
         try {
