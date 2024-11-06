@@ -27,10 +27,10 @@ function QuestionForm({
 
     useEffect(
         function () {
-            if (question) return
+            if (question || numOfQuestions === 1) return
             ref.current.scrollIntoView({ behavior: "smooth" })
         },
-        [question],
+        [question, numOfQuestions],
     )
 
     function isUniqueValidation(numField, value) {
