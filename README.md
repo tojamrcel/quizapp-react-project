@@ -6,7 +6,7 @@ Technologies I used:
 
 -   React Router
 -   Context API
--   TailwindCSS
+-   tailwindcss
 
 ## CMD:
 
